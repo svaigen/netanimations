@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>NetAnimations</title>
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/angular/angular-route.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- app's js -->
+    <script src="js/app/app.js"></script>
+    <script src="js/app/module.js"></script>
+    <script src="js/vendor/angular-translate/2.4.2/angular-translate.min.js"></script>
+    <script src="js/vendor/angular-translate/2.4.2/angular-translate-storage-cookie.min.js"></script>
+    <script src="js/vendor/greensock-js/1.13.1/TweenMax.min.js"></script>
+    <script src="js/vendor/greensock-js/1.13.1/TimelineMax.min.js"></script>
+
+    <!-- controllers -->
+    <script src="js/app/controllers.js"></script>
+    <script src="js/app/threeway-handshake.js"></script>
+    <script src="js/app/sequence-number.js"></script>
+    <script src="js/app/pure-aloha.js"></script>
+	<script src="js/app/hybrid-model.js"></script>
+
+</head>
+
+<body ng-app="netanimations" class="platform-android platform-cordova platform-webview">
+    <ion-nav-view animation="slide-left-right"></ion-nav-view>
+</body>
+</html>

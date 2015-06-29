@@ -1,0 +1,113 @@
+.animation-frame {
+    background-size:cover;
+    width:350px;
+    height:600px;
+    text-align:center;
+    position:relative;
+    line-height:40px;
+    margin:20px auto;
+}
+
+.sn-bg {
+    background-image:url("../img/sequence-number/sn-bg.svg");
+}
+
+.twhs-bg {
+    background-image: url(../img/threeway-handshake/twhs-bg.svg);
+	background-size: 95%;
+	background-repeat: no-repeat;
+}
+
+.twhs-frame{
+	font-size: 10pt;
+	text-align: center;
+	float:right;
+	width: 120px;
+	height: 100px;
+	border: 1px solid #000;
+}
+
+#twhs-f-one{
+	margin-top: 10%;
+	clear: both;
+	z-index: 11;
+}
+
+#twhs-f-two{
+	margin-top: 80%;
+	clear: both;
+	z-index:12;
+}
+
+.hm-bg-por {
+    background-image: url(../img/hybrid-model/hm-bg-por.svg);
+	background-size: 95%;
+	background-repeat: no-repeat;
+}
+
+.hm-bg-en {
+    background-image: url(../img/hybrid-model/hm-bg-en.svg);
+	background-size: 95%;
+	background-repeat: no-repeat;
+}
+
+.pa-bg {
+    background-image: url(../img/pure-aloha/pa-bg.png);
+}
+
+.box {
+    position: relative;
+    width: 20px;
+    height: 15px;
+    margin-right: 10px;
+    float: left;
+    border: 1px solid #000000;
+}
+
+.box1{
+	position: absolute;
+	z-index: 1;
+	width: 20px;
+	height: 15px;
+	border: 1px solid #000000;	
+}
+
+.fadeout{
+	/*fadeout properties*/
+	-webkit-transition: all 1s ease-in-out;
+	-moz-transition: all 1s ease-in-out;
+	-ms-transition: all 1s ease-in-out;
+	-o-transition: all 1s ease-in-out;
+	transition: all 1s ease-in-out;
+}
+
+.white {
+    background-color: #ffffff;
+}
+.orange{
+	background-color: #ff8000;
+}
+.black{
+	background-color: #000000;
+}
+.blue{
+	background-color: #0000ff;
+}
+.red{
+	background-color: #ff0000;
+}
+.green{
+	background-color: #00ff00;
+}
+
+.message{
+	background-image: url("../img/icons/message.png");
+}
+
+#focus{
+	width: 350px;
+	height: 200px;
+	position:relative;
+	margin:auto;
+	border: 2px solid #000;
+}
