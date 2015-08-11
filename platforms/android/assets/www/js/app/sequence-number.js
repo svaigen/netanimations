@@ -7,13 +7,18 @@ angular.module('netanimations.sequencenumber', [])
 
         var segment1 = ".segment-01";
         var segment2 = ".segment-02";
-        var zoomIn = {width: 300, left:"50%", top:"50%"};
-        var zoomOutAndRotate90 = {width: 40, rotation: 90};
+		var segmentInitialSize = window.innerHeight * 0.05;
+		var zoomInScale = window.innerHeight * 0.4;
+		var zoomPipeScale = window.innerHeight * 0.1;
+        var zoomIn = {width: zoomInScale};
+		var bottom = window.innerHeight - (window.innerHeight * 0.35);
+		var top = window.innerHeight - (window.innerHeight * 0.95);
+        var zoomOutAndRotate90 = {width: zoomPipeScale, rotation: 90};
         var rotate0 = {rotation: 0};
         var hide = {className:"ng-hide"};
         var show = {className:"ng-show"};
-        var sendBottom = {y: 420};
-        var sendTop = {y: 10};
+        var sendBottom = {y: bottom};
+        var sendTop = {y: top};
 
         var tl = new TimelineMax();
         tl.call(function() {
@@ -28,8 +33,9 @@ angular.module('netanimations.sequencenumber', [])
                 });
             });
         });
-
-        tl.add(segment1, 0, {width: 50}); //dummy step - do not remove
+		tl.to(segment1, 0, {y:top});
+        tl.to(segment1, 0, {width:segmentInitialSize});
+        //tl.add(segment1, 0, {width: 50}); //dummy step - do not remove
 
         tl.call(function() {
             tl.pause();
@@ -44,7 +50,8 @@ angular.module('netanimations.sequencenumber', [])
             });
         });
 
-        tl.to(segment1, 0.1, {width: 50}); //dummy step - do not remove
+        tl.to(segment2, 0, {y:top});
+        tl.to(segment2, 0, {width:segmentInitialSize});
 
         tl.call(function() {
             tl.pause();
@@ -59,7 +66,7 @@ angular.module('netanimations.sequencenumber', [])
             });
         });
 
-        tl.to(segment1, 0.1, {width: 50}); //dummy step - do not remove
+        //tl.to(segment1, 0.1, {width: 50}); //dummy step - do not remove
 
         tl.call(function() {
             tl.pause();
@@ -74,7 +81,7 @@ angular.module('netanimations.sequencenumber', [])
             });
         });
 
-        tl.to(segment1, 0.1, {width: 50}); //dummy step - do not remove
+        //tl.to(segment1, 0.1, {width: 50}); //dummy step - do not remove
 
         tl.call(function() {
             tl.pause();
@@ -220,7 +227,7 @@ angular.module('netanimations.sequencenumber', [])
         });
 
         //dummy step - do not remove
-        tl.to(segment1, 0.1, {width: 50});
+        //tl.to(segment1, 0.1, {width: 50});
 
         tl.call(function() {
             tl.pause();

@@ -1,7 +1,4 @@
 .animation-frame {
-    background-size:cover;
-    width:350px;
-    height:600px;
     text-align:center;
     position:relative;
     line-height:40px;
@@ -12,9 +9,13 @@
     background-image:url("../img/sequence-number/sn-bg.svg");
 }
 
+.bg{
+	background-size:100% 100%;
+	max-height: 100%;
+	width: auto;
+}
 .twhs-bg {
     background-image: url(../img/threeway-handshake/twhs-bg.svg);
-	background-size: 95%;
 	background-repeat: no-repeat;
 }
 
@@ -41,7 +42,6 @@
 
 .hm-bg-por {
     background-image: url(../img/hybrid-model/hm-bg-por.svg);
-	background-size: 95%;
 	background-repeat: no-repeat;
 }
 
@@ -52,24 +52,24 @@
 }
 
 .pa-bg {
-    background-image: url(../img/pure-aloha/pa-bg.png);
+    background-image: url(../img/pure-aloha/pa-bg.svg);
 }
 
 .box {
     position: relative;
-    width: 20px;
+    /*width: 20px;
     height: 15px;
     margin-right: 10px;
-    float: left;
+    float: left;*/
     border: 1px solid #000000;
 }
 
 .box1{
 	position: absolute;
 	z-index: 1;
-	width: 20px;
-	height: 15px;
-	border: 1px solid #000000;	
+	/*width: 20px;
+	height: 15px;*/
+	border: 1px solid #000000;
 }
 
 .fadeout{
@@ -101,7 +101,8 @@
 }
 
 .message{
-	background-image: url("../img/icons/message.png");
+	background-image: url("../img/icons/message.svg");
+  background-size: cover;
 }
 
 #focus{

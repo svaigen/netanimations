@@ -11,8 +11,8 @@ angular.module('netanimations.hybridmodel', [])
 		var segment4 = "#segment-4";
 		var focus = "#focus";
 		var message = "#message";
-		var initialPosition = {top: "110px", left: "308px"};
-		var pipePosition = {top: "110px", left: "64px"};
+		var initialPosition = {top: (window.innerHeight * 0.15), left: ((window.innerWidth / 2) + (window.innerHeight * 0.195))};
+		var pipePosition = {top: (window.innerHeight * 0.15), left: ((window.innerWidth / 2) - window.innerHeight * 0.20)};
 		var pipePosition2 = {top: "280px", left: "64px"};
 		var routerPosition = {top: "120px", left:"144px"};
 		var serverPosition = {top: "298px", left:"144px"};
@@ -22,13 +22,13 @@ angular.module('netanimations.hybridmodel', [])
 		var delayHide ={opacity:0, delay: -1};
         var show = {opacity: 1};
 		var delayShow = {opacity:1, delay: -1};
-        var sendDown = {top: "+=15px"};
+        var sendDown = {top: "+="+(window.innerHeight * 0.03)};
 		var sendDown2 = {top: "+=31px"};
         var sendRight = {left: "+=41px"};
 		var delaySendRight = {left: "+=41px", delay: -1};
         var sendLeft = {left: "-=41px"};
 		var delaySendLeft = {left:"-=41px", delay: -1};
-		var delaySendDown = {top:"+=15px", delay: -1};
+		var delaySendDown = {top:"+="+(window.innerHeight * 0.03), delay: -1};
 		var delaySendDown2 = {top:"+=31px", delay: -1};
 		var insertFadeout = {className: "+=fadeout"};
 		var removeFadeout = {className: "-=fadeout"};
@@ -40,9 +40,19 @@ angular.module('netanimations.hybridmodel', [])
             $scope.end = false;
         };
 		/*Starts segments and focus*/
+    tl.to(message,0, {width: (window.innerHeight * 0.04)});
+    tl.to(message,0, {height: (window.innerHeight * 0.03)});
+    tl.to(segment1,0, {width: (window.innerHeight * 0.04)});
+    tl.to(segment1,0, {height: (window.innerHeight * 0.03)});
+    tl.to(segment2,0, {width: (window.innerHeight * 0.04)});
+    tl.to(segment2,0, {height: (window.innerHeight * 0.03)});
+    tl.to(segment3,0, {width: (window.innerHeight * 0.04)});
+    tl.to(segment3,0, {height: (window.innerHeight * 0.03)});
+    tl.to(segment4,0, {width: (window.innerHeight * 0.04)});
+    tl.to(segment4,0, {height: (window.innerHeight * 0.03)});
 		tl.to(message, 0, initialPosition);
 		tl.to(message, 0, hide);
-        tl.to(segment1, 0, initialPosition);
+    tl.to(segment1, 0, initialPosition);
 		tl.to(segment1, 0, hide);
 		tl.to(segment2, 0, initialPosition);
 		tl.to(segment2, 0, hide);
@@ -95,9 +105,9 @@ angular.module('netanimations.hybridmodel', [])
             });
         });
 		tl.to(focus,1,show);
-		tl.to(message,1,delayShow);		
+		tl.to(message,1,delayShow);
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-		
+
 		tl.call(function() {
             tl.pause();
 
@@ -110,15 +120,15 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(message,1,sendDown);
-		tl.to(segment1,1,show);		
+		tl.to(segment1,1,show);
 		tl.to(message,1,sendLeft);
 		tl.to(segment1,1,delaySendLeft);
 		tl.to(segment2,0,sendLeft);
 		tl.to(segment3,0,sendLeft);
 		tl.to(segment4,0,sendLeft);
-				
+
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 		tl.call(function() {
             tl.pause();
@@ -135,12 +145,12 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(message,1,sendDown);
 		tl.to(segment1,1,delaySendDown);
 		tl.to(segment2,1,show);
-		tl.to(message,1,sendLeft);		
+		tl.to(message,1,sendLeft);
 		tl.to(segment1,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment3,0,sendLeft);
 		tl.to(segment4,0,sendLeft);
-		
+
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 		tl.call(function() {
             tl.pause();
@@ -154,17 +164,17 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(message,1,sendDown);
 		tl.to(segment1,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
 		tl.to(segment3,1,show);
-		tl.to(message,1,sendLeft);		
+		tl.to(message,1,sendLeft);
 		tl.to(segment1,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment3,1,delaySendLeft);
-		tl.to(segment4,0,sendLeft);		
-		
+		tl.to(segment4,0,sendLeft);
+
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 		tl.call(function() {
             tl.pause();
@@ -178,18 +188,18 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(message,1,sendDown);
 		tl.to(segment1,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
 		tl.to(segment3,1,delaySendDown);
 		tl.to(segment4,1,show);
-		tl.to(message,1,sendLeft);		
+		tl.to(message,1,sendLeft);
 		tl.to(segment1,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment3,1,delaySendLeft);
-		tl.to(segment4,1,delaySendLeft);		
-		
+		tl.to(segment4,1,delaySendLeft);
+
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 		tl.call(function() {
             tl.pause();
@@ -203,13 +213,13 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
-		tl.to(message,1,sendLeft);		
+
+		tl.to(message,1,sendLeft);
 		tl.to(segment1,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment3,1,delaySendLeft);
 		tl.to(segment4,1,delaySendLeft);
-		
+
 		/*Segments disappear from layers*/
 		tl.to(message,0,insertFadeout);
 		tl.to(segment1,0,insertFadeout);
@@ -226,7 +236,7 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment2,0,removeFadeout);
 		tl.to(segment3,0,removeFadeout);
 		tl.to(segment4,0,removeFadeout);
-		
+
 		/*Segments appear in the pipe*/
 		tl.to(message,0,pipePosition);
 		tl.to(segment1,0,pipePosition);
@@ -247,9 +257,9 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment4,1,sendDown);
 		tl.to(segment3,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
-		tl.to(segment1,1,delaySendDown);		
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+		tl.to(segment1,1,delaySendDown);
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['INFO', 'HYBRID_MODEL_PRESENTATION_9']).then(function(translations) {
@@ -261,18 +271,18 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		/*Slide segments in the pipe*/
 		tl.to(segment4,1,sendDown2);
 		tl.to(segment3,1,delaySendDown2);
 		tl.to(segment2,1,delaySendDown2);
 		tl.to(segment1,1,delaySendDown2);
 		tl.to(message,1,delaySendDown2);
-		
-		/*Segments disappear from tube*/		
+
+		/*Segments disappear from tube*/
 		tl.to(segment4,1,sendDown);
 		tl.to(segment4,1,delayHide);
-		tl.to(segment3,1,delaySendDown);		
+		tl.to(segment3,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
 		tl.to(segment1,1,delaySendDown);
 		tl.to(message,1,delaySendDown);
@@ -291,8 +301,8 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(message,1,sendDown);
 		tl.to(message,1,delayHide);
 		tl.to(focus,1,{top:"+=110px"});
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['EXAMPLE', 'HYBRID_MODEL_PRESENTATION_10']).then(function(translations) {
@@ -304,7 +314,7 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		/*Segments appear in router's layers*/
 		tl.to(message,0,routerPosition);
 		tl.to(segment1,0,routerPosition);
@@ -326,8 +336,8 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment2,1,delayShow);
 		tl.to(segment1,1,delayShow);
 		tl.to(message,1,delayShow);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11']).then(function(translations) {
@@ -339,14 +349,14 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,1,sendRight);
 		tl.to(segment3,1,delaySendRight);
 		tl.to(segment2,1,delaySendRight);
 		tl.to(segment1,1,delaySendRight);
 		tl.to(message,1,delaySendRight);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12']).then(function(translations) {
@@ -358,7 +368,7 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,0,insertFadeout);
 		tl.to(segment4,1,hide);
 		tl.to(segment4,0,removeFadeout);
@@ -367,7 +377,7 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment1,1,delaySendRight);
 		tl.to(message,1,delaySendRight);
 
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_13']).then(function(translations) {
@@ -379,13 +389,13 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment3,1,sendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment1,1,delaySendLeft);
-		tl.to(message,1,delaySendLeft);		
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+		tl.to(message,1,delaySendLeft);
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_14']).then(function(translations) {
@@ -397,15 +407,15 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,1,show);
 		tl.to(segment4,1,sendLeft);
 		tl.to(segment3,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment1,1,delaySendLeft);
-		tl.to(message,1,delaySendLeft);		
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+		tl.to(message,1,delaySendLeft);
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_15']).then(function(translations) {
@@ -417,35 +427,35 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,1,sendLeft);
 		tl.to(segment3,1,delaySendLeft);
 		tl.to(segment2,1,delaySendLeft);
 		tl.to(segment1,1,delaySendLeft);
-		tl.to(message,1,delaySendLeft);		
-		
+		tl.to(message,1,delaySendLeft);
+
 		/*Segments disappear from router's layers*/
 		tl.to(segment4,0,insertFadeout);
 		tl.to(segment3,0,insertFadeout);
 		tl.to(segment2,0,insertFadeout);
 		tl.to(segment1,0,insertFadeout);
 		tl.to(message,0,insertFadeout);
-		
+
 		tl.to(segment4,1,delayHide);
 		tl.to(segment3,1,delayHide);
 		tl.to(segment2,1,delayHide);
 		tl.to(segment1,1,delayHide);
 		tl.to(message,1,delayHide);
-		
+
 		tl.to(segment4,0,removeFadeout);
 		tl.to(segment3,0,removeFadeout);
 		tl.to(segment2,0,removeFadeout);
 		tl.to(segment1,0,removeFadeout);
 		tl.to(message,0,removeFadeout);
-		
+
 		tl.to(focus,1,{height: "220px"});
 		tl.to(focus,1,{top:"+=180px"});
-		
+
 		/*Segments appear in pipe (second piece)*/
 		tl.to(message,0,pipePosition2);
 		tl.to(segment1,0,pipePosition2);
@@ -467,11 +477,11 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment3,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
 		tl.to(segment1,1,delaySendDown);
-		
+
 		/*Segments slide and disappear in pipe*/
 		tl.to(segment4,1,sendDown);
 		tl.to(segment4,1,delayHide);
-		tl.to(segment3,1,delaySendDown);		
+		tl.to(segment3,1,delaySendDown);
 		tl.to(segment2,1,delaySendDown);
 		tl.to(segment1,1,delaySendDown);
 		tl.to(message,1,delaySendDown);
@@ -489,8 +499,8 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(message,1,delaySendDown);
 		tl.to(message,1,sendDown);
 		tl.to(message,1,delayHide);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['INFO', 'HYBRID_MODEL_PRESENTATION_16']).then(function(translations) {
@@ -502,7 +512,7 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(message,0,serverPosition);
 		tl.to(segment1,0,serverPosition);
 		tl.to(segment2,0,serverPosition);
@@ -523,8 +533,8 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment2,1,delayShow);
 		tl.to(segment1,1,delayShow);
 		tl.to(message,1,delayShow);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11']).then(function(translations) {
@@ -536,14 +546,14 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,1,sendRight);
 		tl.to(segment3,1,delaySendRight);
 		tl.to(segment2,1,delaySendRight);
 		tl.to(segment1,1,delaySendRight);
 		tl.to(message,1,delaySendRight);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12']).then(function(translations) {
@@ -555,7 +565,7 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment4,0,insertFadeout);
 		tl.to(segment4,1,hide);
 		tl.to(segment4,0,removeFadeout);
@@ -564,7 +574,7 @@ angular.module('netanimations.hybridmodel', [])
 		tl.to(segment1,1,delaySendRight);
 		tl.to(message,1,delaySendRight);
 
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_17']).then(function(translations) {
@@ -576,15 +586,15 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment3,0,insertFadeout);
 		tl.to(segment3,1,hide);
 		tl.to(segment3,0,removeFadeout);
 		tl.to(segment2,1,sendRight);
 		tl.to(segment1,1,delaySendRight);
 		tl.to(message,1,delaySendRight);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_18']).then(function(translations) {
@@ -596,14 +606,14 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment2,0,insertFadeout);
 		tl.to(segment2,1,hide);
 		tl.to(segment2,0,removeFadeout);
 		tl.to(segment1,1,sendRight);
 		tl.to(message,1,delaySendRight);
-		
-		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove        
+
+		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         tl.call(function() {
 			tl.pause();
             $translate(['DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_19']).then(function(translations) {
@@ -615,11 +625,11 @@ angular.module('netanimations.hybridmodel', [])
                 });
             });
         });
-		
+
 		tl.to(segment1,0,insertFadeout);
 		tl.to(segment1,1,hide);
 		tl.to(segment1,0,removeFadeout);
-		
+
 		tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
         //end
         tl.call(function() {

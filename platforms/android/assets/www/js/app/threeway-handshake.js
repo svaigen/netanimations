@@ -12,17 +12,23 @@ angular.module('netanimations.threewayhandshake', [])
 
         TweenLite.defaultEase = Power1.easeInOut;
 
-        var segment = ".segment";
-        var zoomIn = {width: 300};
-        var zoomOutAndRotate90 = {width: 40, rotation: 90};
+        var segment = '.segment';
+		var segmentInitialSize = window.innerHeight * 0.05;
+		var zoomInScale = window.innerHeight * 0.4;
+		var zoomPipeScale = window.innerHeight * 0.1;
+		var bottom = window.innerHeight - (window.innerHeight * 0.3);
+		var top = window.innerHeight - (window.innerHeight * 0.9);
+        var zoomIn = {width: zoomInScale};
+        var zoomOutAndRotate90 = {width: zoomPipeScale, rotation: 90};
         var rotate0 = {rotation: 0};
         var hide = {className:"ng-hide"};
         var show = {className:"ng-show"};
-        var sendBottom = {y: 420};
-        var sendTop = {y: 10};
+        var sendBottom = {y: bottom};
+        var sendTop = {y: top};
 
         //initial position
-        tl.to(segment, 0, {width:"50px"});
+		tl.to(segment, 0, {y:top});
+        tl.to(segment, 0, {width:segmentInitialSize});
 
         tl.call(function() {
             tl.pause();
@@ -146,4 +152,5 @@ angular.module('netanimations.threewayhandshake', [])
 
         //hide
         tl.to(segment, 1, hide);
+		
     });
