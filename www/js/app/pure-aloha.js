@@ -6,13 +6,13 @@ angular.module('netanimations.purealoha', [])
   var segment2 = "#segment-2";
   var patternHeight = 595;
   var patternWidth = 350;
-  var realHeight = window.innerHeight - 44; // 44 é a altura do header, que deve ser desconsiderado
-  var realWidth = window.innerWidth;
-  var boxWidth = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 40, 'x');
-  var boxHeight = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 34, 'y');
-  var initialSeg1Top = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 59, 'y');
+  var width = window.innerWidth;
+  var height = window.innerHeight - 44; // 44 é a altura do header, que deve ser desconsiderado
+  var boxWidth = transform(patternHeight, patternWidth, height, width, 40, 'x', true);
+  var boxHeight = transform(patternHeight, patternWidth, height, width, 34, 'y', true);
+  var initialSeg1Top = transform(patternHeight, patternWidth, height, width, 59, 'y', false);
   var initialSeg1Left = window.innerWidth / 2;
-  var initialSeg2Top = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 208, 'y');
+  var initialSeg2Top = transform(patternHeight, patternWidth, height, width, 208, 'y', false);
   var initialSeg2Left = window.innerWidth / 2;
   var initialPosition1 = {top: initialSeg1Top, left: initialSeg1Left };
   var initialPosition2 = {top: initialSeg2Top, left: initialSeg2Left};
@@ -20,11 +20,11 @@ angular.module('netanimations.purealoha', [])
   var rotate0 = {rotation: 0};
   var hide = {opacity: 0};
   var show = {opacity: 1};
-  var downScale = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 140, 'y');
-  var downScale2 = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 180, 'y');
-  var rightAndLeftScale = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 118, 'x');
-  var colisionMovementScale = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 40, 'y');
-  var crossingPipeScale = transformViewPort(patternHeight, patternWidth, realHeight, realWidth, 360, 'y');
+  var downScale = height * 0.23;
+  var downScale2 = height * 0.3;
+  var rightAndLeftScale = transform(patternHeight, patternWidth, height, width, 118, 'x',false);
+  var colisionMovementScale = transform(patternHeight, patternWidth, height, width, 40, 'y', false);
+  var crossingPipeScale = transform(patternHeight, patternWidth, height, width, 360, 'y', false);
   var sendDown = {top: "+="+downScale};
   var sendDown2 = {top: "+="+downScale2};
   var sendRight = {left: "+="+rightAndLeftScale};
@@ -202,24 +202,17 @@ angular.module('netanimations.purealoha', [])
   $scope.end = true;
 });
 
-function transformViewPort(patternHeight, patternWidth, realHeight, realWidth, value, coordinate){
+function transform(patternHeight, patternWidth, realHeight, realWidth, value, coordinate, isSize){
   var patternAspectRatio = patternWidth/patternHeight;
-  var realAspectRatio = realWidth/realHeight;
-  if(patternAspectRatio == realAspectRatio){
-    return value;
-  } else if(patternAspectRatio > realAspectRatio){
-    var vMax = (realWidth/patternAspectRatio);
-    if(coordinate == 'x'){
-        return value*(realWidth/patternWidth);
-    }else{
-        return (value*(realHeight/patternHeight)) + ((realHeight-vMax)/2);
-    }
-  } else {
-    var uMax = patternAspectRatio*realHeight;
-    if(coordinate == 'x'){
-      return (value*(realWidth/patternWidth)) + ((realWidth - uMax)/2);
-    }else{
-      return value*(realHeight/patternHeight);
-    }
+  if (coordinate == 'x'){
+      var consideredWidth = realHeight * patternAspectRatio;
+      var newValue = (value * consideredWidth) / patternWidth;
+      if(consideredWidth < realWidth && !isSize){
+        return (realWidth - newValue) / 2;
+      } else{
+        return newValue;
+      }
+  } else { //coordinate == 'y'
+      return (value * (realHeight/patternHeight));
   }
 }
