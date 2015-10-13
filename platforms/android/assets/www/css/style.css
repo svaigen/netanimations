@@ -15,7 +15,7 @@
 	width: auto;
 }
 .twhs-bg {
-    background-image: url(../img/threeway-handshake/twhs-bg.svg);
+  background-image: url(../img/threeway-handshake/twhs-bg.svg);
 	background-repeat: no-repeat;
 }
 
@@ -53,6 +53,16 @@
 
 .pa-bg {
     background-image: url(../img/pure-aloha/pa-bg.svg);
+}
+
+.intra-as-bg1 {
+  background-image: url(../img/intra-as-routing/intra-routing.svg);
+	background-repeat: no-repeat;
+}
+
+.intra-as-bg2{
+  background-image: url(../img/intra-as-routing/intra-routing-2.svg);
+	background-repeat: no-repeat;
 }
 
 .box {
@@ -103,6 +113,10 @@
 .message{
 	background-image: url("../img/icons/message.svg");
   background-size: cover;
+}
+
+.center th, td{
+  text-align: center;
 }
 
 #focus{

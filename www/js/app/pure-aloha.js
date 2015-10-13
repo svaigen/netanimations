@@ -205,14 +205,14 @@ angular.module('netanimations.purealoha', [])
 function transform(patternHeight, patternWidth, realHeight, realWidth, value, coordinate, isSize){
   var patternAspectRatio = patternWidth/patternHeight;
   if (coordinate == 'x'){
-      var consideredWidth = realHeight * patternAspectRatio;
-      var newValue = (value * consideredWidth) / patternWidth;
-      if(consideredWidth < realWidth && !isSize){
-        return (realWidth - newValue) / 2;
-      } else{
-        return newValue;
-      }
+    var consideredWidth = realHeight * patternAspectRatio;
+    var newValue = (value * consideredWidth) / patternWidth;
+    if(consideredWidth < realWidth && !isSize){
+      return (((realWidth - consideredWidth) / 2) + newValue);
+    } else{
+      return newValue;
+    }
   } else { //coordinate == 'y'
-      return (value * (realHeight/patternHeight));
+  return (value * (realHeight/patternHeight));
   }
 }

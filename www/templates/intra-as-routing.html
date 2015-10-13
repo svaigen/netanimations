@@ -1,0 +1,63 @@
+<ion-view title="{{'INTRA_AS' | translate}}">
+    <ion-nav-buttons side="left">
+        <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
+    </ion-nav-buttons>
+    <ion-nav-buttons side="right">
+        <a class="button button-icon icon ion-arrow-return-left" ng-click="restart()" ng-show="end"></a>
+    </ion-nav-buttons>
+    <ion-content class="has-header bg intra-as-bg1">
+        <div id="animationFrame" class="animation-frame">
+            <table class="r1b center table table-responsive table-bordered table-striped white hide">
+              <tr>
+                <th colspan="3"><b>Tabela de roteamento de 1b</b></th>
+              </tr>
+              <tr>
+                <th>Sub-rede Destino</th>
+                <th>Roteador seguinte</th>
+                <th>Salto até o destino</th>
+              </tr>
+              <tr>
+                <td>x</td>
+                <td id="x-1">1a</td>
+                <td id="x-2">6</td>
+              </tr>
+              <tr>
+                <td >y</td>
+                <td>-</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>z</td>
+                <td>1a</td>
+                <td>2</td>
+              </tr>
+            </table>
+            <table class="r1c center table table-responsive table-bordered table-striped white hide">
+              <tr>
+                <th colspan="3"><b>Tabela de roteamento de 1c</b></th>
+              </tr>
+              <tr>
+                <th>Sub-rede Destino</th>
+                <th>Roteador seguinte</th>
+                <th>Salto até o destino</th>
+              </tr>
+              <tr>
+                <td>x</td>
+                <td>3c</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td >y</td>
+                <td>1b</td>
+                <td>2</td>
+              </tr>
+              <tr>
+                <td>z</td>
+                <td>1b</td>
+                <td>3</td>
+              </tr>
+            </table>
+            <div id="segment" class="box white hide"></div>
+        </div>
+    </ion-content>
+</ion-view>

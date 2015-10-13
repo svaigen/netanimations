@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW X7 -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="119px" height="79px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 83 55"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ enable-background="new 0 0 90 90">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#373435;stroke-width:1.64882}
+    .fil0 {fill:#373435}
+    .fil1 {fill:black}
+    .fil2 {fill:#373435;fill-rule:nonzero}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect class="fil0 str0" transform="matrix(1.41361 -2.46805E-005 -2.89734E-005 1.41361 24.2075 39.9434)" width="23.7322" height="6.98026"/>
+  <g id="_755938643904">
+   <path class="fil1" d="M13 49c-6,0 -11,-2 -13,-5l0 4c0,4 6,7 13,7 7,0 13,-3 13,-7l0 -4c-2,3 -7,5 -13,5z"/>
+   <path class="fil1" d="M4 45c5,3 13,3 18,0 5,-3 5,-7 0,-10 -5,-3 -13,-3 -18,0 -5,3 -5,7 0,10zm6 -8l2 -1 -1 3 -5 0 1 -1 -3 -2 3 -1 3 2zm11 2l-1 -1 -4 2 -2 -2 3 -2 -2 -1 5 1 1 3zm-5 4l-2 1 1 -3 5 0 -2 1 4 1 -3 2 -3 -2zm-10 1l-1 -3 1 1 4 -2 2 2 -3 2 1 0 -4 0z"/>
+  </g>
+  <g id="_755938642304">
+   <path class="fil1" d="M70 49c-6,0 -11,-2 -13,-5l0 4c0,4 6,7 13,7 7,0 13,-3 13,-7l0 -4c-2,3 -7,5 -13,5z"/>
+   <path class="fil1" d="M61 45c5,3 13,3 18,0 5,-2 5,-7 0,-10 -5,-3 -13,-3 -18,0 -5,3 -5,8 0,10zm6 -8l1 -1 0 3 -5 0 1 0 -3 -2 3 -2 3 2zm11 2l-2 -1 -3 2 -2 -2 3 -2 -2 0 5 0 1 3zm-5 4l-2 1 1 -3 5 0 -2 1 4 2 -3 1 -3 -2zm-10 1l-1 -2 1 0 4 -1 2 1 -3 2 1 1 -4 -1z"/>
+  </g>
+  <path class="fil2" d="M43 13l-2 0 -2 -3 -5 0 -1 3 -2 0 5 -13 2 0 5 13zm-4 -5l-2 -5 -2 5 4 0z"/>
+  <path id="1" class="fil2" d="M44 9l2 -1c1,1 1,2 1,2 1,1 1,1 2,1 1,0 2,0 2,-1 0,0 1,0 1,-1 0,0 -1,0 -1,-1 0,0 0,0 -1,0 0,0 -1,0 -2,-1 -1,0 -2,0 -2,-1 -1,-1 -2,-2 -2,-3 0,0 1,-1 1,-1 0,-1 1,-1 1,-2 1,0 2,0 3,0 2,0 3,0 3,1 1,1 2,2 2,3l-3 0c0,-1 0,-1 -1,-1 0,-1 0,-1 -1,-1 -1,0 -1,0 -2,1 0,0 0,0 0,0 0,1 0,1 0,1 0,0 1,1 2,1 2,0 3,1 3,1 1,0 1,1 2,1 0,1 0,1 0,2 0,1 0,1 -1,2 0,1 0,1 -1,1 -1,1 -2,1 -3,1 -1,0 -3,0 -4,-1 0,-1 -1,-2 -1,-3z"/>
+ </g>
+</svg>
