@@ -65,6 +65,26 @@
 	background-repeat: no-repeat;
 }
 
+.inter-as-bg1 {
+  background-image: url(../img/inter-as-routing/inter-as-1.svg);
+	background-repeat: no-repeat;
+}
+
+.inter-as-bg2 {
+  background-image: url(../img/inter-as-routing/inter-as-2.svg);
+	background-repeat: no-repeat;
+}
+
+.inter-as-bg3 {
+  background-image: url(../img/inter-as-routing/inter-as-3.svg);
+	background-repeat: no-repeat;
+}
+
+.inter-as-bg4 {
+  background-image: url(../img/inter-as-routing/inter-as-4.svg);
+	background-repeat: no-repeat;
+}
+
 .box {
     position: relative;
     /*width: 20px;
