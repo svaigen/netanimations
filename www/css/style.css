@@ -85,6 +85,28 @@
 	background-repeat: no-repeat;
 }
 
+.inter-as-bg5 {
+  background-image: url(../img/inter-as-routing/inter-as-5.svg);
+	background-repeat: no-repeat;
+}
+
+.ethernet-bg {
+  background-image: url(../img/ethernet/ethernet-bg.svg);
+	background-repeat: no-repeat;
+}
+
+.ear {
+  position: absolute;
+  background-image: url(../img/icons/ear.svg);
+	background-repeat: no-repeat;
+}
+
+.trash{
+  position: absolute;
+  background-image: url(../img/icons/trash.svg);
+	background-repeat: no-repeat;
+}
+
 .box {
     position: relative;
     /*width: 20px;

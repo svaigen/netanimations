@@ -1,6 +1,7 @@
 angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalprecht.translate',
 'netanimations.threewayhandshake', 'netanimations.sequencenumber', 'netanimations.purealoha',
- 'netanimations.hybridmodel', 'netanimations.intraasrouting','netanimations.interasrouting'])
+ 'netanimations.hybridmodel', 'netanimations.intraasrouting','netanimations.interasrouting',
+ 'netanimations.ethernet'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -109,6 +110,16 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
       'menuContent': {
         templateUrl: 'templates/inter-as-routing.html',
         controller: 'InterAsRoutingCtrl'
+      }
+    }
+  })
+
+  .state('app.ethernet',{
+    url: '/ethernet',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/ethernet.html',
+        controller: 'EthernetCtrl'
       }
     }
   })
@@ -236,7 +247,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     SEQUENCE_NUMBER_DESC: 'Dois dos mais importantes campos do cabeçalho TCP.',
     SEQUENCE_NUMBER_PRESENTATION_1: 'Dois dos mais importantes campos do cabeçalho TCP são o campo de número de sequência e o campo de número de reconhecimento.',
     SEQUENCE_NUMBER_PRESENTATION_2: 'Esses números são aplicados sobre a cadeia de bytes transmitidos, e não sobre a série de segmentos transmitidos.',
-    SEQUENCE_NUMBER_PRESENTATION_3: 'O número de sequência para um segmento é o número do primeiro byte do segmento. Ex: Suponha que um processo no host A deseja enviar uma mensagem ao processo no host B por uma conexão TCP.',
+    SEQUENCE_NUMBER_PRESENTATION_3: 'O número de sequência para um segmento é o número do primeiro byte da cadeia de dados do segmento. Ex: Suponha que um processo no host A deseja enviar uma mensagem ao processo no host B por uma conexão TCP.',
     SEQUENCE_NUMBER_PRESENTATION_4: 'Considere que a cadeia de dados seja um arquivo de 500.000 bytes, o MSS (maximum segment size) seja de 1.000 bytes e que seja atribuído o número 0 ao primeiro byte da cadeia de dados.',
     SEQUENCE_NUMBER_PRESENTATION_5: 'Neste caso, o TCP constrói 500 segmentos a partir da cadeia de dados. O primeiro segmento recebe o número de sequência 0, o segundo 1000, o terceiro 2000 e assim sucessivamente.',
     SEQUENCE_NUMBER_PRESENTATION_6: 'Já o número de reconhecimento que um host atribui a seu segmento é o número de sequência do próximo byte que ele está aguardando. EX: O host B está prestes a enviar os bytes numerados de 0 a 535 ao host A. Como acabou de receber os bytes de 0 a 999, o host B envia como número de reconhecimento o valor 1000 referente ao próximo byte.',
@@ -293,13 +304,13 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     INTRA_AS_PRESENTATION_13: 'Caso <b>1b</b> envie dados para a sub-rede <b>X</b>, o caminho realizado é o exibido a seguir.',
 
     INTER_AS: 'Protocolos Inter-AS',
-    INTER_AS_TITLE: 'Protocolos Inter-AS: i-BGP e e-BGP',
-    INTER_AS_DESC: 'Apresentação de conceitos e procedimentos dos protocolos de roteamento hierárquico inter-AS.',
+    INTER_AS_TITLE: 'Protocolo Inter-AS: BGP',
+    INTER_AS_DESC: 'Apresentação de conceitos e procedimentos do protocolo de roteamento hierárquico inter-AS BGP.',
     INTER_AS_PRESENTATION_1: 'Para resolver problemas de escala e autonomia administrativa do roteamento na internet, realiza-se o agrupamento de roteadores em sistemas autônomos (autonomous systems - AS).',
     INTER_AS_PRESENTATION_2: 'Cada AS é composto de um grupo de roteadores sob o <b>mesmo controle administrativo</b>, que rodam o <b>mesmo protocolo de roteamento</b> e dispõem de informações sobre cada um dos outros.',
     INTER_AS_PRESENTATION_3: 'A versão 4 do <b>Protocolo de Roteador de Borda</b> (Border Gateway Protocol - BGP) é o padrão para roteamento entre sistemas autônomos na Internet.',
     INTER_AS_PRESENTATION_4: 'O BGP provê a cada AS meio de: obter de ASs vizinhos informações de atingibilidade de sub-redes; propagar essas informação aos roteadores internos ao AS; determinar rotas "boas" para sub-redes com base na informação de atingibilidade e na política do AS',
-    INTER_AS_PRESENTATION_5: 'Nessa animação, temos como exemplo os sistemas autônomos <b>AS1</b> e <b>AS2</b>, cada qual com seu próprio protocolo de roteamento, ou seja, eles podem ser diferentes em cada AS.',
+    INTER_AS_PRESENTATION_5: 'Nessa animação, temos como exemplo os sistemas autônomos <b>AS1</b> e <b>AS2</b>, cada qual com seu próprio protocolo de roteamento INTRA-AS, ou seja, eles podem ser diferentes em cada AS.',
     INTER_AS_PRESENTATION_6: '<b>Roteadores de borda</b> são roteadores que transmitem pacotes a destinos externos ao seu AS. Nesse exemplo, temos como roteadores de borda: <b>1a</b> em <b>AS1</b>, que possui uma "ligação" com AS2; e em AS2 temos <b>2a</b>, que possui ligação com AS1, e <b>2d</b>, que possui ligação com outro AS, não especificado na animação.',
     INTER_AS_PRESENTATION_7: 'No quadro de animação a seguir, os roteadores de borda são destacados na cor verde, e os caminhos entre ASs são destacados na cor laranja.',
     INTER_AS_PRESENTATION_8: 'Suponha que o roteador <b>1c</b> necessite transmitir um pacote para um destino fora do seu AS. Para isso, ele transmite o pacote conforme foi especificado pela tabela de repasse, configurada pelo próprio protocolo de roteamento <b>INTRA-AS</b> de AS1.',
@@ -310,7 +321,22 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     INTER_AS_PRESENTATION_13: 'As sessões BGP são classificadas como <b>externas (eBGP)</b>, quando abrange dois ASs diferentes, ou <b>internas (iBGP)</b>, quando abrange dois roteadores no mesmo AS. A seguir são apresentadas no exemplo as sessões eBGP em laranja e iBGP em azul.',
     INTER_AS_PRESENTATION_14: 'O BGP permite que cada AS conheça <b>quais destinos podem ser alcançados</b> via seus ASs vizinhos. No exemplo, usando então sessões <b>eBGP</b> entre <b>1a</b> e <b>2a</b>, AS2 envia <b>informações de atingibilidade</b> de prefixos para AS1, e vice-versa.',
     INTER_AS_PRESENTATION_15: 'Quando um roteador de borda recebe prefixos conhecidos pelo BGP, ele usa suas sessões <b>iBGP</b> para distribuir os prefixos aos outros roteadores no AS. No exemplo da animação, caso o roteador <b>1a</b> receba informações de <b>2a</b>, ele repassará a <b>1b</b> e <b>1c</b>.',
-    INTER_AS_PRESENTATION_16: 'O BGP ainda possui outros atributos importantes, como o <b>AS-PATH</b> e o <b>NEXT-HOP</b>. Para conhecer mais sobre esses atributos e ver essa animação mais detalhada, visite o repositório online das animações, pelo endereço: <b>http://din.uem.br/~animanet/pages/hierarchicalRouting</b>.'
+    INTER_AS_PRESENTATION_16: 'O BGP ainda possui outros atributos importantes, como o <b>AS-PATH</b>. Este atributo contém informações dos ASs pelos quais passou o anúncio para o prefixo. Esse atributo é utilizado para detectar e evitar <b>looping de anúncios</b> e também ao <b>escolher entre vários caminhos</b> para o mesmo prefixo.',
+    INTER_AS_PRESENTATION_17: 'Suponha, no exemplo tratado, que há um prefixo <b>X</b> de outro AS, alcançado por AS2 pelo roteador de borda <b>2d</b>. Desse modo, AS2 anunciará o prefixo <b>X</b> para AS1, onde dessa maneira, seu <b>ASPATH</b> seria AS2.',
+    INTER_AS_PRESENTATION_18: 'Outro atributo é o <b>NEXT-HOP</b>, que é utilizado para o roteador poder <b>configurar sua tabela de repasse</b> adequadamente. Para conhecer mais sobre esse atributo, veja a versão extendida dessa animação no repositório de animações, em <b>http://din.uem.br/~animanet/pages/hierarchicalRouting</b>.',
+
+    ETHERNET_TITLE: 'Protocolo Ethernet',
+    ETHERNET_DESC: 'Funcionamento do protocolo útilizado em LANs com fio.',
+    ETHERNET_PRESENTATION_1: 'O <b>Ethernet</b> é um protocolo da <b>camada de enlace</b>, que é capaz de permitir o acesso a um canal <i>broadcast</i>. Ele necessita de protocolo de acesso múltiplo, sendo o mais comum o <b>CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</b>.',
+    ETHERNET_PRESENTATION_2: 'Numa rede que utiliza este protocolo, cada adaptador executa o protocolo CSMA/CD sem coordenação explícita com os demais adaptadores Ethernet.',
+    ETHERNET_PRESENTATION_3: 'Nesta animação será ilustrado o funcionamento do protocolo por meio de um exemplo com <b>três hosts</b>. Considere que o <b>host A</b> deseja enviar um quadro para o <b>host C</b> através do canal broadcast.',
+    ETHERNET_PRESENTATION_4: 'O adaptador do <b>host A</b> receberá o datagrama da camada de rede e prepara um quadro <b>Ethernet</b> e o insere no <b>buffer de saída</b> do adaptador.',
+    ETHERNET_PRESENTATION_5: 'Como o protocolo CSMA/CD não utiliza "compartimentos", um adaptador pode começar a transmitir a qualquer momento, no qual é capaz de perceber se outros adaptadores estão transmitindo e detectar colisões, medindo os níveis de tensão antes e durante a transmissão.',
+    ETHERNET_PRESENTATION_6: 'Suponha que antes do <b>host A</b> iniciar sua transmissão, o <b>host B</b> decide enviar um quadro para o <b>host C</b>. Como ele detecta o meio livre, envia "na frente" do <b>host A</b>.',
+    ETHERNET_PRESENTATION_7: 'Dessa maneira, antes de iniciar sua transmissão, o <b>host A</b> identifica que o <b>Host B</b> está enviando um quadro. Dessa maneira, o <b>Host A</b> aborta sua transmissão.',
+    ETHERNET_PRESENTATION_8: 'Este processo de "ouvir" antes de enviar é denominado <b>detecção de portadora</b>. Durante uma transmissão, o adaptador monitora a presença de energia vinda de outros adaptadores. Este processo de "ouvir" enquanto "fala" é denominado <b>detecção de colisão</b>.',
+    ETHERNET_PRESENTATION_9: 'Dando continuidade ao exemplo, ao detectar que o canal está livre, o <b>host A</b> encaminha o quadro ao canal broadcast.',
+
   });
 
   $translateProvider.preferredLanguage('pt-br');

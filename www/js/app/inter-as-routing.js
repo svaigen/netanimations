@@ -12,18 +12,28 @@ angular.module('netanimations.interasrouting', [])
   var height = window.innerHeight - 44; // 44 é a altura do header, que deve ser desconsiderado
   var boxWidth = transform(patternHeight, patternWidth, height, width, 20, 'x', true);
   var boxHeight = transform(patternHeight, patternWidth, height, width, 20, 'y', true);
+
   var transmission1cTo1aTop = transform(patternHeight, patternWidth, height, width, 70, 'y', false);
   var transmission1cTo1aLeft = transform(patternHeight, patternWidth, height, width, 262, 'x', false);
-  var crossingVerticalPipe1 = transform(patternHeight, patternWidth, height, width, 50, 'y', false);
-  var crossingHorizontalPipe1 = transform(patternHeight, patternWidth, height, width, 60, 'x', false);
   var transmission1aTo2aTop = transform(patternHeight, patternWidth, height, width, 150, 'y', false);
   var transmission1aTo2aLeft = transform(patternHeight, patternWidth, height, width, 162, 'x', false);
-  var crossingAS1ToAS2 = transform(patternHeight, patternWidth, height, width, 100, 'y', false);
   var transmission1aTo1cTop = transform(patternHeight, patternWidth, height, width, 120, 'y', false);
   var transmission1aTo1cLeft = transform(patternHeight, patternWidth, height, width, 186, 'x', false);
   var transmission1aTo1bTop = transform(patternHeight, patternWidth, height, width, 120, 'y', false);
   var transmission1aTo1bLeft = transform(patternHeight, patternWidth, height, width, 139, 'x', false);
+  var transmission2dTo2cTop = transform(patternHeight, patternWidth, height, width, 420, 'y', false);
+  var transmission2dTo2cLeft = transform(patternHeight, patternWidth, height, width, 62, 'x', false);
+  var transmission2cTo2aTop = transform(patternHeight, patternWidth, height, width, 450, 'y', false);
+  var transmission2cTo2aLeft = transform(patternHeight, patternWidth, height, width, 162, 'x', false);
+  var transmission2aTo1aTop = transform(patternHeight, patternWidth, height, width, 250, 'y', false);
+  var transmission2aTo1aLeft = transform(patternHeight, patternWidth, height, width, 162, 'x', false);
 
+  var crossingVerticalPipe1 = transform(patternHeight, patternWidth, height, width, 50, 'y', false);
+  var crossingHorizontalPipe1 = transform(patternHeight, patternWidth, height, width, 60, 'x', false);
+  var crossingVerticalPipe2 = transform(patternHeight, patternWidth, height, width, 58, 'y', false);
+  var crossingHorizontalPipe2 = transform(patternHeight, patternWidth, height, width, 60, 'x', false);
+  var crossingVerticalPipe3 = transform(patternHeight, patternWidth, height, width, 140, 'y', false);
+  var crossingAS1ToAS2 = transform(patternHeight, patternWidth, height, width, 100, 'y', false);
   $scope.restart = function () {
     tl.seek(0);
     $scope.end = false;
@@ -34,7 +44,7 @@ angular.module('netanimations.interasrouting', [])
   tl.set(segment1,{height: boxHeight});
   tl.set(segment2,{width:boxWidth});
   tl.set(segment2,{height: boxHeight});
-
+  
   tl.call(function() {
     tl.pause();
 
@@ -316,6 +326,60 @@ angular.module('netanimations.interasrouting', [])
       $ionicPopup.alert({
         title: translations.INFO,
         template: translations.INTER_AS_PRESENTATION_16
+      }).then(function() {
+        tl.resume();
+      });
+    });
+  });
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
+
+  //change background to bg5
+  tl.to('.bg',0.5,{autoAlpha:0});
+  tl.set('.bg',{className:"-=inter-as-bg4"});
+  tl.set('.bg',{className:"+=inter-as-bg5"});
+  tl.to('.bg',2,{autoAlpha:1});
+
+  tl.call(function() {
+    tl.pause();
+
+    $translate(['INFO', 'INTER_AS_PRESENTATION_17']).then(function(translations) {
+      $ionicPopup.alert({
+        title: translations.INFO,
+        template: translations.INTER_AS_PRESENTATION_17
+      }).then(function() {
+        tl.resume();
+      });
+    });
+  });
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
+
+  //ASPATH animation
+  tl.set(segment1,{top:transmission2dTo2cTop});
+  tl.set(segment1,{left:transmission2dTo2cLeft});
+  tl.set(segment1,{className: "-=hide"});
+  tl.set(segment1,{autoAlpha:0});
+  tl.to(segment1,0.5,{autoAlpha:1});
+  tl.to(segment1,1,{top:"+="+crossingVerticalPipe2});
+  tl.to(segment1,1,{left:"+="+crossingHorizontalPipe2});
+  tl.to(segment1,0.5,{autoAlpha:0});
+  tl.set(segment1,{top:transmission2cTo2aTop});
+  tl.set(segment1,{left:transmission2cTo2aLeft});
+  tl.to(segment1,0.5,{autoAlpha:1});
+  tl.to(segment1,1,{top:"-="+crossingVerticalPipe3});
+  tl.to(segment1,0.5,{autoAlpha:0});
+  tl.set(segment1,{top:transmission2aTo1aTop});
+  tl.set(segment1,{left:transmission2aTo1aLeft});
+  tl.to(segment1,0.5,{autoAlpha:1});
+  tl.to(segment1,1,{top:"-="+crossingAS1ToAS2});
+  tl.to(segment1,0.5,{autoAlpha:0});
+
+  tl.call(function() {
+    tl.pause();
+
+    $translate(['INFO', 'INTER_AS_PRESENTATION_18']).then(function(translations) {
+      $ionicPopup.alert({
+        title: translations.INFO,
+        template: translations.INTER_AS_PRESENTATION_18
       }).then(function() {
         tl.resume();
       });
