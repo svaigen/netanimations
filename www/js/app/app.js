@@ -336,7 +336,15 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     ETHERNET_PRESENTATION_7: 'Dessa maneira, antes de iniciar sua transmissão, o <b>host A</b> identifica que o <b>Host B</b> está enviando um quadro. Dessa maneira, o <b>Host A</b> aborta sua transmissão.',
     ETHERNET_PRESENTATION_8: 'Este processo de "ouvir" antes de enviar é denominado <b>detecção de portadora</b>. Durante uma transmissão, o adaptador monitora a presença de energia vinda de outros adaptadores. Este processo de "ouvir" enquanto "fala" é denominado <b>detecção de colisão</b>.',
     ETHERNET_PRESENTATION_9: 'Dando continuidade ao exemplo, ao detectar que o canal está livre, o <b>host A</b> encaminha o quadro ao canal broadcast.',
-
+    ETHERNET_PRESENTATION_10: 'Caso o <b>Host A</b> não detecte nenhuma sinal vindo de outros adaptadores, ele considera que o quadro foi entregue.',
+    ETHERNET_PRESENTATION_11: 'Vamos considerar agora que o <b>Host A</b> esteja enviando um quadro para o <b>host C</b>.',
+    ETHERNET_PRESENTATION_12: 'Nesse caso, assuma que antes do quadro enviado passar pelo <b>host B</b>, esse host deseja iniciar uma transmissão.',
+    ETHERNET_PRESENTATION_13: 'Ao detectar a presença de energia vinda de outro host, o <b>host B</b> aborta a sua transmissão.',
+    ETHERNET_PRESENTATION_14: 'Para garantir que todos os hosts, inclusive o <b>host A</b>, estejam cientes da colisão, o <b>host B</b> envia um sinal de reforço de colisão de <b>48 bits</b>.',
+    ETHERNET_PRESENTATION_15: 'Após abortar a transmissão, os hosts entram em fase de <b>backoff exponencial</b>. Nesta fase, os hosts aguardam um tempo aleatório, antes de tentar uma retransmissão.',
+    ETHERNET_PRESENTATION_16: 'Dando sequencia ao exemplo, o <b>host A</b> inicia a retransmissão ao aguardar um tempo aleatório.',
+    ETHERNET_PRESENTATION_17: 'Também após aguardar um tempo aleatório, o <b>host B</b> inicia a retransmissão.',
+    ETHERNET_PRESENTATION_18: 'Caso o quadro não seja enviado em no máximo <b>dezesseis tentativas</b>, ele é descartado.',
   });
 
   $translateProvider.preferredLanguage('pt-br');
