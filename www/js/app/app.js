@@ -230,13 +230,18 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     DECAPSULATION: 'Desencapsulamento',
 
     SEGMENT_1: 'Primeiro segmento',
+    SEGMENT_2: 'Segundo segmento',
+    SEGMENT_3: 'Terceiro segmento',
 
     THREEWAY_HANDSHAKE: 'Three-way Handshake',
     THREEWAY_HANDSHAKE_DESC: 'Processo de estabelecimento de conexão TCP',
     THREEWAY_HANDSHAKE_PRESENTATION: 'O Three-way Handshake é um processo de acordo entre as duas partes que desejam estabelecer uma comunicação que consiste em três etapas.',
     TWHS_STEP_1: 'O cliente envia um segmento (requisição) com as flags SYN = 1 e ACK = 0',
+    TWHS_ESP_SEG_1: 'Porta origem: TCP 1026<br/> Porta destino: TCP 524<br/> Nº de sequência: SEQ=0<br/> Tam. da janela: WIN=8192bytes<br/> Flag SYN: SYN=1<br/> Flag ACK: ACK=0<br/>',
     TWHS_STEP_2: 'O servidor responde com um segmento contendo as flags SYN = 1 e ACK = 1, representando que a conexão foi aceita e estabelecida',
+    TWHS_ESP_SEG_2: 'Porta origem: TCP 524<br/> Porta destino: TCP 1026<br/> Nº de sequência: SEQ=0<br/> Tam. da janela: WIN=32768bytes<br/> Flag SYN: SYN=1<br/> Flag ACK: ACK=1<br/>',
     TWHS_STEP_3: 'O cliente responde com um segmento com a flag ACK = 1',
+    TWHS_ESP_SEG_3: 'Porta origem: TCP 524<br/> Porta destino: TCP 1026<br/> Nº de sequência: SEQ=1<br/> Tam. da janela: WIN=32768bytes<br/> Flag SYN: SYN=0<br/> Flag ACK: ACK=1<br/>',
     TWHS_END: 'Após o término dos 3 passos, o Three-way Handshake está completo e as duas partes podem trocar dados entre si.',
     TWHS_CLIENT_SOURCE: 'Cliente Origem',
     TWHS_IP_CLIENT: 'IP 194.153.205.36',
