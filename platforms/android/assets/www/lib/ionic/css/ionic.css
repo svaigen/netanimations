@@ -4556,7 +4556,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
   display: -moz-box;
   display: -moz-flex;
   display: -ms-flexbox;
-  display: flex;
+  display: block;
   -webkit-box-direction: normal;
   -webkit-box-orient: horizontal;
   -webkit-flex-direction: row;
@@ -4564,7 +4564,8 @@ ion-tabs.tabs-color-active-dark .tab-item {
   -ms-flex-direction: row;
   flex-direction: row;
   padding: 10px;
-  min-height: 65px; }
+  min-height: 65px;
+}
   .popup-buttons .button {
     -webkit-box-flex: 1;
     -webkit-flex: 1;
@@ -4576,7 +4577,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
     min-height: 45px;
     border-radius: 2px;
     line-height: 20px;
-    margin-right: 5px; }
+    margin-right: 5px;
+    margin-bottom: 5px;
+   }
     .popup-buttons .button:last-child {
       margin-right: 0px; }
 
@@ -6639,7 +6642,8 @@ progress {
   .button.button-positive {
     border-color: #0c63ee;
     background-color: #387ef5;
-    color: #fff; }
+    color: #fff;
+    width: 100%;}
     .button.button-positive:hover {
       color: #fff;
       text-decoration: none; }

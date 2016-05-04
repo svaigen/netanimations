@@ -139,6 +139,14 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     EXAMPLE: 'Example',
     ANIMATION_END: 'End of animation.',
     END: 'End',
+    SAVE: 'Save',
+    BACK: 'Back',
+
+    ABOUT_APP: 'About app',
+    ABOUT_LEAD: 'An Informatics Department\'s project - UEM',
+    ABOUT_TEXT:'This app was developed to provides animations about Computer Networks. You can contribute with suggestions, corrections and ideas to new animations by e-mail: lafmartimiano@uem.br',
+    ABOUT_CREATOR: 'Project\'s creator',
+    ABOUT_DEVELOPER: 'Project\'s developers',
 
     STEP_1: 'First step',
     STEP_2: 'Second step',
@@ -219,6 +227,14 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     EXAMPLE: 'Exemplo',
     ANIMATION_END: 'Fim da animação.',
     END: 'Fim',
+    SAVE: 'Salvar',
+    BACK: 'Voltar',
+
+    ABOUT_APP: 'Sobre o aplicativo',
+    ABOUT_LEAD: 'Um projeto do Departamento de Informática - UEM',
+    ABOUT_TEXT:'Esse aplicativo foi desenvolvido com objetivo de disponibilizar animações sobre redes de computadores. Você pode contribuir com sugestões, correções, e ideias para novas animações por meio do e-mail lafmartimiano@uem.br.',
+    ABOUT_CREATOR: 'Idealizadora do projeto',
+    ABOUT_DEVELOPER: 'Desenvolvedores do projeto',
 
     STEP_1: 'Primeiro passo',
     STEP_2: 'Segundo passo',

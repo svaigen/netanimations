@@ -4,12 +4,10 @@ angular.module('netanimations.controllers', [])
 
     .controller('AnimationsCtrl', function() {})
 
-    .controller('ConfigCtrl', function($scope, $translate) {
-
+    .controller('ConfigCtrl', function($scope, $translate) {        
         $scope.changeLanguage = function (key) {
-            $translate.use(key);
+              $translate.use(key);
         };
-
     })
 
     .controller('AboutCtrl', function() {});

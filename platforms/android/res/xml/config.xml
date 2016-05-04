@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="br.edu.uem.alissonrenansvaigen.netanimations" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <preference name="loglevel" value="DEBUG" />
     <feature name="Keyboard">
         <param name="android-package" value="com.ionic.keyboard.IonicKeyboard" />
         <param name="onload" value="true" />
@@ -19,10 +18,10 @@
     <feature name="Calendar">
         <param name="android-package" value="nl.xservices.plugins.Calendar" />
     </feature>
-    <icon density="ldpi" src="resources/android/neticons/drawable-ldpi-icon.png" />
-    <icon density="mdpi" src="resources/android/neticons/drawable-mdpi-icon.png" />
-    <icon density="hdpi" src="resources/android/neticons/drawable-hdpi-icon.png" />
-    <icon density="xhdpi" src="resources/android/neticons/drawable-xhdpi-icon.png" />
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
     <name>NetAnimations</name>
     <description>
         Animations from Computer Network classes. Universidade Estadual de Maringá - Paraná - Brazil.
@@ -33,6 +32,11 @@
     <content src="index.html" />
     <icon src="www/img/icon.png" />
     <access origin="*" />
+    <icon density="ldpi" src="resources/android/neticons/drawable-ldpi-icon.png" />
+    <icon density="mdpi" src="resources/android/neticons/drawable-mdpi-icon.png" />
+    <icon density="hdpi" src="resources/android/neticons/drawable-hdpi-icon.png" />
+    <icon density="xhdpi" src="resources/android/neticons/drawable-xhdpi-icon.png" />
+    <preference name="loglevel" value="DEBUG" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
