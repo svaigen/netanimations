@@ -1,8 +1,16 @@
 angular.module('netanimations.interasrouting', [])
-.controller('InterAsRoutingCtrl', function($scope, $ionicPopup, $translate) {
-  TweenLite.defaultEase = Power1.easeInOut;
-  var tl = new TimelineMax();
+.controller('InterAsRoutingCtrl', function($state, $scope, $ionicPopup, $translate) {
   $scope.end = false;
+
+  var tl = new TimelineLite();
+
+  $scope.restart = function () {
+    tl.seek(0);
+    $scope.end = false;
+  };
+
+  TweenLite.defaultEase = Power1.easeInOut;
+
   var segment1 = "#segment1";
   var segment2 = "#segment2";
   var bg2 = "../img/inter-as-routing/inter-routing-2.svg";
@@ -34,137 +42,66 @@ angular.module('netanimations.interasrouting', [])
   var crossingHorizontalPipe2 = transform(patternHeight, patternWidth, height, width, 60, 'x', false);
   var crossingVerticalPipe3 = transform(patternHeight, patternWidth, height, width, 140, 'y', false);
   var crossingAS1ToAS2 = transform(patternHeight, patternWidth, height, width, 100, 'y', false);
-  $scope.restart = function () {
-    tl.seek(0);
-    $scope.end = false;
-  };
+
 
   //initialize segment1 and segment2's properties
   tl.set(segment1,{width:boxWidth});
   tl.set(segment1,{height: boxHeight});
   tl.set(segment2,{width:boxWidth});
   tl.set(segment2,{height: boxHeight});
-  
-  tl.call(function() {
-    tl.pause();
 
-    $translate(['INFO', 'INTER_AS_PRESENTATION_1']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_1
-      }).then(function() {
-        tl.resume();
-      });
-    });
+  tl.add("step1");
+  tl.call( function(){
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'INTER_AS_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step2");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_2']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_2
-      }).then(function() {
-        tl.resume();
-      });
-    });
-  });
-
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
-  tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_3']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_3
-      }).then(function() {
-        tl.resume();
-      });
-    });
-  });
-
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
-  tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_4']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_4
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step3");
   tl.call(function() {
-    tl.pause();
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_3',"step2");
+  });
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
-    $translate(['INFO', 'INTER_AS_PRESENTATION_5']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_5
-      }).then(function() {
-        tl.resume();
-      });
-    });
+  tl.add("step4");
+  tl.call(function() {
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_4',"step3");
+  });
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
+
+  tl.add("step5");
+  tl.call(function() {
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_5',"step4");
   });
   tl.to('.animationFrame', 2, {x: 0}); //dummy step - do not remove
 
+  tl.add("step6");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_6']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_6
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_6',"step5");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step7");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_7']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_7
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_7',"step6");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //change background to bg2
   tl.to('.bg',1,{autoAlpha:0});
   tl.set('.bg',{className:"+=inter-as-bg2",opacity:1});
   tl.to('.bg',2,{autoAlpha:1});
   tl.set('.bg',{className:"-=inter-as-bg1"});
 
+  tl.add("step8");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_8']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_8
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_8',"step7");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //sending a package from 1c in AS1 to AS2
   tl.set(segment1,{top:transmission1cTo1aTop});
   tl.set(segment1,{left:transmission1cTo1aLeft})
@@ -178,34 +115,17 @@ angular.module('netanimations.interasrouting', [])
   tl.to(segment1,1.5,{top:"+="+crossingAS1ToAS2});
   tl.to(segment1,0.5,{autoAlpha:0});
 
+  tl.add("step9");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_9']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_9
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_9',"step8");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step10");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_10']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_10
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_10',"step9");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //change background to bg3 and return to bg2
   tl.to('.bg',0.5,{autoAlpha:0});
   tl.set('.bg',{className:"+=inter-as-bg3"});
@@ -214,45 +134,21 @@ angular.module('netanimations.interasrouting', [])
   tl.set('.bg',{className:"-=inter-as-bg3"});
   tl.to('.bg',0.5,{autoAlpha:1});
 
+  tl.add("step11");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_11']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_11
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_11',"step10");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step12");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_12']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_12
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_12',"step11");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step13");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_13']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_13
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_13',"step12");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
   //change background to bg4
@@ -260,20 +156,11 @@ angular.module('netanimations.interasrouting', [])
   tl.set('.bg',{className:"+=inter-as-bg4"});
   tl.to('.bg',2,{autoAlpha:1});
 
+  tl.add("step14");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_14']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_14
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_14',"step13");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //eBGP animation
   tl.set(segment1,{className: "-=hide"});
   tl.set(segment1,{autoAlpha:0});
@@ -284,20 +171,11 @@ angular.module('netanimations.interasrouting', [])
   tl.to(segment1,1.5,{top:"+="+crossingAS1ToAS2});
   tl.to(segment1,0.5,{autoAlpha:0});
 
+  tl.add("step15");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_15']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_15
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_15',"step14");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //iBGP animation
   tl.set(segment1,{className: "-=hide"});
   tl.set(segment1,{autoAlpha:0});
@@ -319,40 +197,22 @@ angular.module('netanimations.interasrouting', [])
   tl.to(segment1,1,{autoAlpha:0});
   tl.to(segment2,1,{autoAlpha:0,delay:-1});
 
+  tl.add("step16");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_16']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_16
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_16',"step15");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //change background to bg5
   tl.to('.bg',0.5,{autoAlpha:0});
   tl.set('.bg',{className:"-=inter-as-bg4"});
   tl.set('.bg',{className:"+=inter-as-bg5"});
   tl.to('.bg',2,{autoAlpha:1});
 
+  tl.add("step17");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_17']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_17
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_17',"step16");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //ASPATH animation
   tl.set(segment1,{top:transmission2dTo2cTop});
   tl.set(segment1,{left:transmission2dTo2cLeft});
@@ -373,31 +233,15 @@ angular.module('netanimations.interasrouting', [])
   tl.to(segment1,1,{top:"-="+crossingAS1ToAS2});
   tl.to(segment1,0.5,{autoAlpha:0});
 
+  tl.add("step18");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'INTER_AS_PRESENTATION_18']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.INTER_AS_PRESENTATION_18
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTER_AS_PRESENTATION_18',"step17");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.call(function() {
-    $translate(['END', 'ANIMATION_END']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.END,
-        template: translations.ANIMATION_END
-      });
-    });
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step18","step1");
   });
-
-  $scope.end = true;
-
 });
 
 function transform(patternHeight, patternWidth, realHeight, realWidth, value, coordinate, isSize){

@@ -1,7 +1,11 @@
 angular.module('netanimations.purealoha', [])
-.controller('PureAlohaCtrl', function($scope, $ionicPopup, $translate) {
+.controller('PureAlohaCtrl', function($state, $scope, $ionicPopup, $translate) {
   TweenLite.defaultEase = Power1.easeInOut;
   $scope.end = false;
+  $scope.restart = function () {
+    tl.seek(0);
+    $scope.end = false;
+  };
   var segment1 = "#segment-1";
   var segment2 = "#segment-2";
   var patternHeight = 595;
@@ -31,10 +35,6 @@ angular.module('netanimations.purealoha', [])
   var sendLeft = {left: "-="+rightAndLeftScale};
   var tl = new TimelineMax();
 
-  $scope.restart = function () {
-    tl.seek(0);
-    $scope.end = false;
-  };
   tl.to(segment1,0, {width:boxWidth});
   tl.to(segment2,0, {width:boxWidth});
   tl.to(segment1,0, {height:boxHeight});
@@ -43,82 +43,37 @@ angular.module('netanimations.purealoha', [])
   tl.to(segment2, 0, hide);
   tl.to(segment2, 0, initialPosition2);
 
-  tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_1']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_1
-      }).then(function() {
-        tl.resume();
-      });
-    });
+  tl.add("step1");
+  tl.call( function(){
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'PURE_ALOHA_PRESENTATION_1');
   });
-
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step2");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_2']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_2
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_2',"step1");
   });
-
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step3");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_3']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_3
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_3',"step2");
   });
-
   //Host A sends first segment
   tl.to(segment1, 2, sendRight);
   tl.to(segment1, 0.5, rotate90);
   tl.to(segment1, 2, sendDown);
 
+  tl.add("step4");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_4']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_4
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_4',"step3");
   });
-
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step5");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_5']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_5
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_5',"step4");
   });
-
   //Host B sends a segment and there's a colision
   tl.to(segment2, 0.5, show);
   tl.to(segment2, 2, sendRight);
@@ -126,19 +81,10 @@ angular.module('netanimations.purealoha', [])
   tl.to(segment1, 1, {scale:0, opacity:0});
   tl.to(segment2, 1, {scale:0, opacity:0, delay: -1});
 
+  tl.add("step6");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_6']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_6
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_6',"step5");
   });
-
   //Host A sends the segment to Host C
   tl.to(segment1, 0, initialPosition1);
   tl.to(segment1, 0, rotate0);
@@ -150,34 +96,16 @@ angular.module('netanimations.purealoha', [])
   tl.to(segment1, 2, sendLeft);
   tl.to(segment1, 0.5, hide);
 
+  tl.add("step7");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_7']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_7
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_7',"step6");
   });
-
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step8");
   tl.call(function() {
-    tl.pause();
-
-    $translate(['INFO', 'PURE_ALOHA_PRESENTATION_8']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.PURE_ALOHA_PRESENTATION_8
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_8',"step7");
   });
-
   //Host B sends segment to Host C
   tl.to(segment2, 0, initialPosition2);
   tl.to(segment2, 0, rotate0);
@@ -189,17 +117,9 @@ angular.module('netanimations.purealoha', [])
   tl.to(segment2, 2, sendLeft);
   tl.to(segment2, 1, hide);
 
-  //end
   tl.call(function() {
-    $translate(['END', 'ANIMATION_END']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.END,
-        template: translations.ANIMATION_END
-      });
-    });
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step8","step1");
   });
-
-  $scope.end = true;
 });
 
 function transform(patternHeight, patternWidth, realHeight, realWidth, value, coordinate, isSize){
