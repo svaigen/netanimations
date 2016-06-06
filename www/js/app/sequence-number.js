@@ -30,33 +30,33 @@ angular.module('netanimations.sequencenumber', [])
   var sendBottom = {y: bottom};
   var sendTop = {y: top};
 
+  tl.set(segment1, {y:top, width:segmentInitialSize})
+    .set(segment2,{y:top, width:segmentInitialSize});
+
   tl.add("step1");
   tl.call( function(){
     initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_1');
   });
-  tl.to(segment1, 0.5, {y:top});
-  tl.to(segment1, 0.5, {width:segmentInitialSize});
-  //tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_2',"step1");
   });
-  tl.to(segment2, 0.5, {y:top});
-  tl.to(segment2, 0.5, {width:segmentInitialSize});
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_3',"step2");
   });
 
-  tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step4");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_4',"step3");
   });
-  tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step5");
   tl.call(function() {

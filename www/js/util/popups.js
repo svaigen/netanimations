@@ -26,24 +26,24 @@ function initialPopup(tl, $translate, $ionicPopup, $state, $scope, paramTitle, p
 };
 
 function commonPopup(tl, $translate, $ionicPopup, paramTitle, paramTemplate, paramBack){
-  tl.pause();
+  tl.pause(); //interrupção do fluxo do objeto de animação
   $translate([paramTitle, paramTemplate]).then(function(translations) {
     console.log(translations);
-    $ionicPopup.show({
-      title: translations[paramTitle],
-      template: translations[paramTemplate],
+    $ionicPopup.show({ //criação da popup com objeto construtor
+      title: translations[paramTitle], //titulo
+      template: translations[paramTemplate], //descricao
       buttons: [
-        { text: 'Voltar',
+        { text: 'Voltar', //especificacao do backButton
           type: 'button-positive',
           onTap: function(){
-            tl.seek(paramBack);
+            tl.seek(paramBack); //checkpoint de retrocesso
             tl.play();
           }
         },
-        { text: 'Avançar',
+        { text: 'Avançar', //especificacao do nextButton
           type: 'button-positive',
           onTap: function(){
-            tl.resume();
+            tl.resume(); //continuacao do fluxo de execução
           }
         }
       ]

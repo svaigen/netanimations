@@ -16,9 +16,9 @@
         </select>
       </label>
       <label class="item item-toggle">
-        Acessibilidade
+        {{'ACCESSIBILITY' | translate}}
         <label class="toggle toggle-dark">
-          <input type="checkbox">
+          <input ng-model="audiovisual" ng-change="changeAudiovisual(audiovisual)" type="checkbox">
           <div class="track">
             <div class="handle"></div>
           </div>

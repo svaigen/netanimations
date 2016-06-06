@@ -68,7 +68,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     url: '/sequence-number',
     views: {
       'menuContent': {
-        templateUrl: 'templates/sequence-number.html',
+        templateUrl: "templates/sequence-number.html",
         controller: 'SequenceNumberCtrl'
       }
     }
@@ -139,6 +139,14 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     EXAMPLE: 'Example',
     ANIMATION_END: 'End of animation.',
     END: 'End',
+    SAVE: 'Save',
+    BACK: 'Back',
+
+    ABOUT_APP: 'About app',
+    ABOUT_LEAD: 'An Informatics Department\'s project - UEM',
+    ABOUT_TEXT:'This app was developed to provides animations about Computer Networks. You can contribute with suggestions, corrections and ideas to new animations by e-mail: lafmartimiano@uem.br',
+    ABOUT_CREATOR: 'Project\'s creator',
+    ABOUT_DEVELOPER: 'Project\'s developers',
 
     STEP_1: 'First step',
     STEP_2: 'Second step',
@@ -219,6 +227,14 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     EXAMPLE: 'Exemplo',
     ANIMATION_END: 'Fim da animação.',
     END: 'Fim',
+    SAVE: 'Salvar',
+    BACK: 'Voltar',
+
+    ABOUT_APP: 'Sobre o aplicativo',
+    ABOUT_LEAD: 'Um projeto do Departamento de Informática - UEM',
+    ABOUT_TEXT:'Esse aplicativo foi desenvolvido com objetivo de disponibilizar animações sobre redes de computadores. Você pode contribuir com sugestões, correções, e ideias para novas animações por meio do e-mail lafmartimiano@uem.br.',
+    ABOUT_CREATOR: 'Idealizadora do projeto',
+    ABOUT_DEVELOPER: 'Desenvolvedores do projeto',
 
     STEP_1: 'Primeiro passo',
     STEP_2: 'Segundo passo',
@@ -229,6 +245,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     ENCAPSULATION: 'Encapsulamento',
     DECAPSULATION: 'Desencapsulamento',
 
+    SEGMENT: 'Segmento',
     SEGMENT_1: 'Primeiro segmento',
     SEGMENT_2: 'Segundo segmento',
     SEGMENT_3: 'Terceiro segmento',
@@ -255,7 +272,16 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     SEQUENCE_NUMBER_PRESENTATION_3: 'O número de sequência para um segmento é o número do primeiro byte da cadeia de dados do segmento. Ex: Suponha que um processo no host A deseja enviar uma mensagem ao processo no host B por uma conexão TCP.',
     SEQUENCE_NUMBER_PRESENTATION_4: 'Considere que a cadeia de dados seja um arquivo de 500.000 bytes, o MSS (maximum segment size) seja de 1.000 bytes e que seja atribuído o número 0 ao primeiro byte da cadeia de dados.',
     SEQUENCE_NUMBER_PRESENTATION_5: 'Neste caso, o TCP constrói 500 segmentos a partir da cadeia de dados. O primeiro segmento recebe o número de sequência 0, o segundo 1000, o terceiro 2000 e assim sucessivamente.',
-    SEQUENCE_NUMBER_PRESENTATION_6: 'Já o número de reconhecimento que um host atribui a seu segmento é o número de sequência do próximo byte que ele está aguardando. EX: O host B está prestes a enviar os bytes numerados de 0 a 535 ao host A. Como acabou de receber os bytes de 0 a 999, o host B envia como número de reconhecimento o valor 1000 referente ao próximo byte.',
+    SEQUENCE_NUMBER_PRESENTATION_6: 'Número de sequência: 0 <br/>',
+    SEQUENCE_NUMBER_PRESENTATION_7: 'Já o número de reconhecimento que um host atribui a seu segmento é o número de sequência do próximo byte que ele está aguardando. EX: O host B está prestes a enviar os bytes numerados de 0 a 535 ao host A. Como acabou de receber os bytes de 0 a 999, o host B envia como número de reconhecimento o valor 1000 referente ao próximo byte.',
+    SEQUENCE_NUMBER_PRESENTATION_8: 'Número de sequência: 0<br> Número de reconhecimento: 1000',
+    SEQUENCE_NUMBER_PRESENTATION_9: 'Ao receber o segmento com o número de reconhecimento 1000, o host A encaminha os bytes de 1000 a 1999 ao host B. O host A também solicita o próximo segmento ao host B, informando o número 536 no campo número de reconhecimento.',
+    SEQUENCE_NUMBER_PRESENTATION_10: 'Número de sequência: 1000<br> Número de reconhecimento: 536',
+    SEQUENCE_NUMBER_PRESENTATION_11: 'Vamos considerar que logo em seguida o host A encaminha o próximo segmento ao host B, com número de sequência 2000. Como o host A ainda não recebeu o segmento de sequência 536, ele informa novamente este valor no campo número de reconhecimento.',
+    SEQUENCE_NUMBER_PRESENTATION_12: 'Número de sequência: 2000<br> Número de reconhecimento: 536',
+    SEQUENCE_NUMBER_PRESENTATION_13: 'O host B por sua vez envia o segmento com número de sequência 536 ao host A. Como o host B recebeu os segmentos de sequência 1000 e 2000 sucessivamente, ele envia no campo número de reconhecimento o valor 3000, que é o próximo segmento a ser enviado pelo host A.',
+    SEQUENCE_NUMBER_PRESENTATION_14: 'Dizemos que o TCP provê reconhecimentos cumulativos, pois ele reconhece todos os bytes até o primeiro byte que está faltando na cadeia.',
+    SEQUENCE_NUMBER_PRESENTATION_15: 'Número de sequência: 536<br> Número de reconhecimento: 3000',
 
     PURE_ALOHA_TITLE: 'Protocolo Aloha Puro',
     PURE_ALOHA_DESC: 'Resolvendo problemas de alocação de canais na camada de enlace',
@@ -303,10 +329,11 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     INTRA_AS_PRESENTATION_7: 'Cada roteador mantém uma tabela RIP denominada <b>tabela e roteamento</b>, que contém o vetor de distâncias.',
     INTRA_AS_PRESENTATION_8: 'Suponha que o roteador <b>1b</b> deseja alcançar a rede <b>X</b>. Ele pode chegar nela por meio de 1a ou 1c, conforme mostra a animação.',
     INTRA_AS_PRESENTATION_9: 'Para que isso ocorra, <b>1b</b> precisa saber dessa informação. A seguir é apresentada a tabela desse roteador, que a princípio não possui informações referentes ao roteador 1c.',
-    INTRA_AS_PRESENTATION_10: 'Agora, observe na sequência a tabela de roteamento de <b>1c</b>. Procure notar que, para esse roteador, alcançar a sub-rede <b>X</b> são necessários apenas 2 saltos.',
-    INTRA_AS_PRESENTATION_11: 'Suponha que 30 segundos mais tarde, <b> 1b </b> recebe de <b>1c</b> um anúncio que indica que a sub-rede <b>x</b> está apenas 2 saltos do roteador <b>1c</b>. Observe as alterações na tabela de <b>1b</b>.',
-    INTRA_AS_PRESENTATION_12: 'Dessa maneira, quando <b>1b</b> necessitar se comunicar com a sub-rede <b>X</b>, o caminho é o apresentado a seguir.',
-    INTRA_AS_PRESENTATION_13: 'Caso <b>1b</b> envie dados para a sub-rede <b>X</b>, o caminho realizado é o exibido a seguir.',
+    INTRA_AS_PRESENTATION_10: 'Caso <b>1b</b> envie dados para a sub-rede <b>X</b>, o caminho realizado é o exibido a seguir.',
+    INTRA_AS_PRESENTATION_11: 'Agora, observe na sequência a tabela de roteamento de <b>1c</b>. Procure notar que, para esse roteador, alcançar a sub-rede <b>X</b> são necessários apenas 2 saltos.',
+    INTRA_AS_PRESENTATION_12: 'Suponha que 30 segundos mais tarde, <b> 1b </b> recebe de <b>1c</b> um anúncio que indica que a sub-rede <b>x</b> está apenas 2 saltos do roteador <b>1c</b>. Observe as alterações na tabela de <b>1b</b>.',
+    INTRA_AS_PRESENTATION_13: 'Dessa maneira, quando <b>1b</b> necessitar se comunicar com a sub-rede <b>X</b>, o caminho é o apresentado a seguir.',
+
 
     INTER_AS: 'Protocolos Inter-AS',
     INTER_AS_TITLE: 'Protocolo Inter-AS: BGP',
@@ -353,7 +380,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
   });
 
   $translateProvider.preferredLanguage('pt-br');
-  
+
   //$translateProvider.useCookieStorage();
 
 });

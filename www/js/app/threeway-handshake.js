@@ -1,7 +1,7 @@
 angular.module('netanimations.threewayhandshake', [])
 .controller('ThreeWayHandshakeCtrl', function($state, $scope, $ionicPopup, $translate) {
   $scope.end = false;
-
+  console.log($scope.audiovisual);
   var tl = new TimelineLite();
 
   $scope.restart = function () {
@@ -13,7 +13,7 @@ angular.module('netanimations.threewayhandshake', [])
 
   var segment = '.segment';
   var patternHeight = 595;
-  var patternWidth = 422;
+  var patternWidth = 350;
   var realHeight = window.innerHeight - 44; // 44 é a altura do header, que deve ser desconsiderado
   var aspectRatioHeight = realHeight/patternHeight;
   var segmentInitialSize = 50 * aspectRatioHeight;
@@ -28,6 +28,9 @@ angular.module('netanimations.threewayhandshake', [])
   var show = {className:"ng-show"};
   var sendBottom = {y: bottom};
   var sendTop = {y: top};
+  var audio = document.createElement('audio');
+  audio.setAttribute('src','audio/twh/1-2.ogg');
+  var audiovisualPreference = $scope.audiovisual;
 
   //initial position
   tl.set(segment, {y:top}).set(segment, {width:segmentInitialSize});
@@ -37,8 +40,14 @@ angular.module('netanimations.threewayhandshake', [])
     initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'STEP_1', 'TWHS_STEP_1');
   });
 
-  tl.to(segment, 1, show);
-  tl.to(segment, 2, zoomIn);
+  if(audiovisualPreference){
+      tl.to(audio,1,{onComplete:function(){audio.play()}});
+      tl.to(segment, 4, show);
+      tl.to(segment, 4, zoomIn);
+  }else{
+    tl.to(segment, 1, show);
+    tl.to(segment, 2, zoomIn);
+  }
 
   tl.add("step2");
   tl.call(function() {

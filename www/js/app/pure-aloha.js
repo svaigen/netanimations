@@ -26,7 +26,7 @@ angular.module('netanimations.purealoha', [])
   var show = {opacity: 1};
   var downScale = height * 0.23;
   var downScale2 = height * 0.3;
-  var rightAndLeftScale = transform(patternHeight, patternWidth, height, width, 118, 'x',false);
+  var rightAndLeftScale = transform(patternHeight, patternWidth, height, width, 105, 'x',false);
   var colisionMovementScale = transform(patternHeight, patternWidth, height, width, 40, 'y', false);
   var crossingPipeScale = transform(patternHeight, patternWidth, height, width, 360, 'y', false);
   var sendDown = {top: "+="+downScale};

@@ -1,7 +1,16 @@
 angular.module('netanimations.ethernet', [])
-.controller('EthernetCtrl', function($scope, $ionicPopup, $translate) {
-  TweenLite.defaultEase = Power1.easeInOut;
+.controller('EthernetCtrl', function($state, $scope, $ionicPopup, $translate) {
   $scope.end = false;
+
+  var tl = new TimelineLite();
+
+  $scope.restart = function () {
+    tl.seek(0);
+    $scope.end = false;
+  };
+
+  TweenLite.defaultEase = Power1.easeInOut;
+
   var segment1 = "#segment-1";
   var segment2 = "#segment-2";
   var segment3 = "#segment-3";
@@ -42,13 +51,6 @@ angular.module('netanimations.ethernet', [])
   var rotate90 = {rotation: 90};
   var rotate0 = {rotation: 0};
 
-  var tl = new TimelineMax();
-
-  $scope.restart = function () {
-    tl.seek(0);
-    $scope.end = false;
-  };
-
   //initializing objects
   tl.set(segment1,{height:boxHeight});
   tl.set(segment1,{width:boxWidth});
@@ -73,89 +75,45 @@ angular.module('netanimations.ethernet', [])
   tl.set(collision1,{height:collisionHeight, width: collisionWidth, autoAlpha:0});
   tl.set(collision2,{height:collisionHeight, width: collisionWidth, autoAlpha:0});
 
-  tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_1']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_1
-      }).then(function() {
-        tl.resume();
-      });
-    });
+  tl.add("step1");
+  tl.call( function(){
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'ETHERNET_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step2");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_2']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_2
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step3");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_3']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_3
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_3',"step2");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step4");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_4']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_4
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_4',"step3");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //putting segment1 in hostA's adapter
   tl.set(segment1,{top:segHostATop});
   tl.set(segment1,{left:segInitialLeft});
   tl.to(segment1,1,{autoAlpha:1});
 
+  tl.add("step5");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_5']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_5
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_5',"step4");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step6");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_6']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_6
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_6',"step5");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //Host A preparing to send and Host B sending first
   tl.set(ear1,{top:ear1Top,left:earLeft});
   tl.set(ear2,{top:ear2Top,left:earLeft});
@@ -170,19 +128,11 @@ angular.module('netanimations.ethernet', [])
   tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
   tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
 
+  tl.add("step7");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_7']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_7
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_7',"step6");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //sending packages of host B and discarding from host A
   tl.to(segment1,1,{autoAlpha:0});
   tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
@@ -193,32 +143,17 @@ angular.module('netanimations.ethernet', [])
   tl.to(segment2,1,{autoAlpha:0,delay:-1});
   tl.to(trash1,1,{autoAlpha:0,delay:-1});
 
+  tl.add("step8");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_8']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_8
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_8',"step7");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step9");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_9']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_9
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_9',"step8");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //sending from host A to host C
   tl.to(segment1,1,{autoAlpha:1});
   tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
@@ -235,70 +170,39 @@ angular.module('netanimations.ethernet', [])
   tl.to(segment2,1,{autoAlpha:0});
   tl.to(trash2,1,{autoAlpha:0,delay:-1});
 
+  tl.add("step10");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_10']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_10
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_10',"step9");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step11");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_11']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_11
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_11',"step10");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //putting segment1 in hostA's adapter
   tl.set(segment1,{top:segHostATop});
   tl.set(segment1,{left:segInitialLeft});
   tl.to(segment1,1,{autoAlpha:1});
   tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
 
+  tl.add("step12");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_12']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_12
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_12',"step11");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //crashing frame from host A and B
   tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
   tl.to(segment2,0.5,{autoAlpha:1});
   tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
   tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
 
+  tl.add("step13");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_13']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_13
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_13',"step12");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //throwing out the crashed frames
   tl.to(trash2,0.5,{autoAlpha:1});
   tl.to(segment1,1.5,{top:trash2Top,left:trashsLeft,delay:-0.5});
@@ -307,19 +211,11 @@ angular.module('netanimations.ethernet', [])
   tl.set(segment1,{autoAlpha:0});
   tl.set(segment2,{autoAlpha:0});
 
+  tl.add("step14");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_14']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_14
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_14',"step13");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //Host B sends a collision signal
   tl.set(collision1,{top:segHostBTop, left: segInitialLeft});
   tl.to(collision1,0.5,{autoAlpha:1});
@@ -332,32 +228,17 @@ angular.module('netanimations.ethernet', [])
   tl.to(collision1,0.5,{autoAlpha:0});
   tl.to(collision2,0.5,{autoAlpha:0, delay:-0.5});
 
+  tl.add("step15");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_15']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_15
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_15',"step14");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
+  tl.add("step16");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_16']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_16
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_16',"step15");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //correct Host A's transmission
   tl.set(segment1,{top:segHostATop, left: segInitialLeft});
   tl.to(segment1,0.5,{autoAlpha:1});
@@ -375,19 +256,11 @@ angular.module('netanimations.ethernet', [])
   tl.to(segment2,1,{autoAlpha:0});
   tl.to(trash2,1,{autoAlpha:0,delay:-1});
 
+  tl.add("step17");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_17']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_17
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_17',"step16");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-
   //correct Host B's transmission
   tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
   tl.set(segment3,{top:segHostBTop, left:segInitialLeft});
@@ -404,30 +277,16 @@ angular.module('netanimations.ethernet', [])
   tl.to(segment2,0.5,{autoAlpha:0});
   tl.to(trash1,0.5,{autoAlpha:0,delay:-0.5});
 
+  tl.add("step18");
   tl.call(function() {
-    tl.pause();
-    $translate(['INFO', 'ETHERNET_PRESENTATION_18']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.INFO,
-        template: translations.ETHERNET_PRESENTATION_18
-      }).then(function() {
-        tl.resume();
-      });
-    });
+    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_18',"step17");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   //end
   tl.call(function() {
-    $translate(['END', 'ANIMATION_END']).then(function(translations) {
-      $ionicPopup.alert({
-        title: translations.END,
-        template: translations.ANIMATION_END
-      });
-    });
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step18","step1");
   });
-
-  $scope.end = true;
 });
 
 function transform(patternHeight, patternWidth, realHeight, realWidth, value, coordinate, isSize){
