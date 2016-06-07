@@ -32,6 +32,8 @@ angular.module('netanimations.intraasrouting', [])
   var crossingHalfRouterLeft = transform(patternHeight, patternWidth, height, width, 28, 'y', false);
   var crossingAllRouterTop = transform(patternHeight, patternWidth, height, width, 60, 'y', false);
   var crossingAllRouterLeft = transform(patternHeight, patternWidth, height, width, 70, 'y', false);
+  var audio = document.createElement('audio');
+  var audiovisualPreference = $scope.audiovisual;
 
   tl.add("step1");
   tl.call( function(){
@@ -79,118 +81,209 @@ angular.module('netanimations.intraasrouting', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_8',"step7");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //change background to bg2
-  tl.to('.bg',0.5,{opacity:0});
-  tl.to('.bg',2,{className:"+=intra-as-bg2",opacity:1});
-  tl.to('.bg',0.5,{opacity:0});
-  tl.to('.bg',0,{className:"-=intra-as-bg2"});
-  tl.to('.bg',0.5,{opacity:1});
+  if(audiovisualPreference){
+    //change background to bg2
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/8-9.ogg')}});
+    tl.to('.bg',0.5,{opacity:0});
+    tl.to('.bg',36,{className:"+=intra-as-bg2",opacity:1});
+    tl.to('.bg',0.5,{opacity:0});
+    tl.to('.bg',0,{className:"-=intra-as-bg2"});
+    tl.to('.bg',0.5,{opacity:1});
+  }else{
+    //change background to bg2
+    tl.to('.bg',0.5,{opacity:0});
+    tl.to('.bg',2,{className:"+=intra-as-bg2",opacity:1});
+    tl.to('.bg',0.5,{opacity:0});
+    tl.to('.bg',0,{className:"-=intra-as-bg2"});
+    tl.to('.bg',0.5,{opacity:1});
+  }
 
   tl.add("step9");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_9',"step8");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //show 1b router's table
-  tl.to('.r1b',3,{className:"-=hide"});
+  if(audiovisualPreference){
+    //show 1b router's table
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/9-10.ogg')}});
+    tl.to('.r1b',30,{className:"-=hide"});
+  }else{
+    //show 1b router's table
+    tl.to('.r1b',3,{className:"-=hide"});
+  }
 
   tl.add("step10");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_10',"step9");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //hidding 1b router's table
-  tl.to('.r1b',1,{opacity:0});
-  tl.to('.r1b',0,{className:"+=hide"});
-  //sending data from 1b to X throwing by 1a
-  tl.set(segment,{width:boxWidth});
-  tl.set(segment,{height:boxHeight});
-  tl.set(segment,{top: transmission1Top});
-  tl.set(segment,{left: transmission1Left});
-  tl.to(segment,0,{opacity:0});
-  tl.to(segment,1,{className:"-=hide"});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{left:"-="+crossingPipeScale});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{top:"-="+crossingHalfRouterTop});
-  tl.set(segment,{left:"-="+crossingHalfRouterLeft});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{top:"-="+crossingPipeScale});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{top:"-="+crossingAllRouterTop});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{top:"-="+crossingPipeScale});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{top:"-="+crossingAllRouterTop});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{top:"-="+crossingPipeScale2});
-  tl.to(segment,1,{left:"+="+crossingPipeScale2});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{left:"+="+crossingAllRouterLeft});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{left:"+="+crossingPipeScale2});
-  tl.to(segment,1,{top:"+="+crossingPipeScale2});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{left:"+="+crossingHalfRouterLeft});
-  tl.set(segment,{top:"+="+(crossingHalfRouterTop+12)});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{left:"+=100"});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/10-11.ogg')}});
+    //hidding 1b router's table
+    tl.to('.r1b',0.5,{opacity:0});
+    tl.to('.r1b',0,{className:"+=hide"});
+    //sending data from 1b to X throwing by 1a
+    tl.set(segment,{width:boxWidth}).set(segment,{height:boxHeight}).set(segment,{top: transmission1Top}).set(segment,{left: transmission1Left});
+    tl.to(segment,0,{opacity:0});
+    tl.to(segment,0.5,{className:"-=hide"});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{left:"-="+crossingPipeScale});
+    tl.to(segment,0.5,{opacity:0});
+    tl.set(segment,{top:"-="+crossingHalfRouterTop}).set(segment,{left:"-="+crossingHalfRouterLeft});
+    tl.to(segment,0.5,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale});
+    tl.to(segment,0.5,{opacity:0});
+    tl.set(segment,{top:"-="+crossingAllRouterTop});
+    tl.to(segment,0.5,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale});
+    tl.to(segment,0.5,{opacity:0});
+    tl.set(segment,{top:"-="+crossingAllRouterTop});
+    tl.to(segment,0.5,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale2});
+    tl.to(segment,1,{left:"+="+crossingPipeScale2});
+    tl.to(segment,0.5,{opacity:0});
+    tl.set(segment,{left:"+="+crossingAllRouterLeft});
+    tl.to(segment,0.5,{opacity:1});
+    tl.to(segment,1,{left:"+="+crossingPipeScale2});
+    tl.to(segment,1,{top:"+="+crossingPipeScale2});
+    tl.to(segment,0.5,{opacity:0});
+    tl.set(segment,{left:"+="+crossingHalfRouterLeft});
+    tl.set(segment,{top:"+="+(crossingHalfRouterTop+12)});
+    tl.to(segment,0.5,{opacity:1});
+    tl.to(segment,1,{left:"+=100"});
+  }else{
+    //hidding 1b router's table
+    tl.to('.r1b',1,{opacity:0});
+    tl.to('.r1b',0,{className:"+=hide"});
+    //sending data from 1b to X throwing by 1a
+    tl.set(segment,{width:boxWidth}).set(segment,{height:boxHeight}).set(segment,{top: transmission1Top}).set(segment,{left: transmission1Left});
+    tl.to(segment,0,{opacity:0});
+    tl.to(segment,1,{className:"-=hide"});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{left:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingHalfRouterTop}).set(segment,{left:"-="+crossingHalfRouterLeft});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingAllRouterTop});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingAllRouterTop});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{top:"-="+crossingPipeScale2});
+    tl.to(segment,1,{left:"+="+crossingPipeScale2});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{left:"+="+crossingAllRouterLeft});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{left:"+="+crossingPipeScale2});
+    tl.to(segment,1,{top:"+="+crossingPipeScale2});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{left:"+="+crossingHalfRouterLeft});
+    tl.set(segment,{top:"+="+(crossingHalfRouterTop+12)});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{left:"+=100"});
+  }
 
   tl.add("step11");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_11',"step10");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //showing 1c router's table
-  tl.to('.r1c',0,{opacity:0});
-  tl.to('.r1c',0,{className:"-=hide"});
-  tl.to('.r1c',1,{opacity:1});
-  tl.to('.r1c',3,{opacity:1}); //procurar outra alternativa para manter a tabela na tela por mais tempo
+  if(audiovisualPreference){
+    //showing 1c router's table
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/11-12.ogg')}});
+    tl.to('.r1c',0,{opacity:0});
+    tl.to('.r1c',0,{className:"-=hide"});
+    tl.to('.r1c',1,{opacity:1});
+    tl.to('.r1c',29,{opacity:1}); //procurar outra alternativa para manter a tabela na tela por mais tempo
+  }else{
+    //showing 1c router's table
+    tl.to('.r1c',0,{opacity:0});
+    tl.to('.r1c',0,{className:"-=hide"});
+    tl.to('.r1c',1,{opacity:1});
+    tl.to('.r1c',3,{opacity:1}); //procurar outra alternativa para manter a tabela na tela por mais tempo
+  }
 
   tl.add("step12");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_12',"step11");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //changing 1b router's table
-  tl.to('.r1c',1,{opacity:0});
-  tl.to('.r1c',0,{className:"+=hide"});
-  tl.to('.r1b',0,{opacity:0});
-  tl.to('.r1b',0,{className:"-=hide"});
-  tl.to('.r1b',1,{opacity:1});
-  tl.to("#x-1",1,{opacity:0});
-  tl.call(function(){document.getElementById("x-1").innerHTML = "1c"});
-  tl.to("#x-1",2,{opacity:1});
-  tl.to("#x-2",1,{opacity:0});
-  tl.call(function(){document.getElementById("x-2").innerHTML = "3"});
-  tl.to("#x-2",2,{opacity:1});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/12-13.ogg')}});
+    //changing 1b router's table
+    tl.to('.r1c',1,{opacity:0});
+    tl.to('.r1c',0,{className:"+=hide"});
+    tl.to('.r1b',0,{opacity:0});
+    tl.to('.r1b',0,{className:"-=hide"});
+    tl.to('.r1b',6,{opacity:1});
+    tl.to("#x-1",1,{opacity:0});
+    tl.call(function(){document.getElementById("x-1").innerHTML = "1c"});
+    tl.to("#x-1",2,{opacity:1});
+    tl.to("#x-2",1,{opacity:0});
+    tl.call(function(){document.getElementById("x-2").innerHTML = "3"});
+    tl.to("#x-2",3,{opacity:1});
+  }else{
+    //changing 1b router's table
+    tl.to('.r1c',1,{opacity:0});
+    tl.to('.r1c',0,{className:"+=hide"});
+    tl.to('.r1b',0,{opacity:0});
+    tl.to('.r1b',0,{className:"-=hide"});
+    tl.to('.r1b',1,{opacity:1});
+    tl.to("#x-1",1,{opacity:0});
+    tl.call(function(){document.getElementById("x-1").innerHTML = "1c"});
+    tl.to("#x-1",2,{opacity:1});
+    tl.to("#x-2",1,{opacity:0});
+    tl.call(function(){document.getElementById("x-2").innerHTML = "3"});
+    tl.to("#x-2",2,{opacity:1});
+  }
 
   tl.add("step13");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_13',"step12");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //hidding 1b router's table and sending data from 1b to X
-  tl.to('.r1b',1,{opacity:0});
-  tl.to('.r1b',0,{className:"+=hide"});
-  tl.set(segment,{width:boxWidth});
-  tl.set(segment,{height:boxHeight});
-  tl.set(segment,{top: transmission2Top});
-  tl.set(segment,{left: transmission2Left});
-  tl.to(segment,0,{opacity:0});
-  tl.to(segment,1,{className:"-=hide"});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,2,{top:"-="+crossingPipeScale});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{top:"-="+crossingRouter1c});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,2,{top:"-="+crossingPipeScale});
-  tl.to(segment,1,{opacity:0});
-  tl.set(segment,{top:"-="+crossingRouter3cTop});
-  tl.set(segment,{left:"+="+crossingRouter3cLeft});
-  tl.to(segment,1,{opacity:1});
-  tl.to(segment,1,{left:"+=100"});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/13-14.ogg')}});
+    //hidding 1b router's table and sending data from 1b to X
+    tl.to('.r1b',1,{opacity:0});
+    tl.to('.r1b',0,{className:"+=hide"});
+    tl.set(segment,{width:boxWidth});
+    tl.set(segment,{height:boxHeight});
+    tl.set(segment,{top: transmission2Top});
+    tl.set(segment,{left: transmission2Left});
+    tl.to(segment,0,{opacity:0});
+    tl.to(segment,1,{className:"-=hide"});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,2,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingRouter1c});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,2,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingRouter3cTop});
+    tl.set(segment,{left:"+="+crossingRouter3cLeft});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,2,{left:"+=100"});
+  }else{
+    //hidding 1b router's table and sending data from 1b to X
+    tl.to('.r1b',1,{opacity:0});
+    tl.to('.r1b',0,{className:"+=hide"});
+    tl.set(segment,{width:boxWidth});
+    tl.set(segment,{height:boxHeight});
+    tl.set(segment,{top: transmission2Top});
+    tl.set(segment,{left: transmission2Left});
+    tl.to(segment,0,{opacity:0});
+    tl.to(segment,1,{className:"-=hide"});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,2,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingRouter1c});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,2,{top:"-="+crossingPipeScale});
+    tl.to(segment,1,{opacity:0});
+    tl.set(segment,{top:"-="+crossingRouter3cTop});
+    tl.set(segment,{left:"+="+crossingRouter3cLeft});
+    tl.to(segment,1,{opacity:1});
+    tl.to(segment,1,{left:"+=100"});
+  }
 
   //end
   tl.call(function() {

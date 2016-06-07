@@ -1,3 +1,8 @@
+function playAudio(audio,source){
+  audio.setAttribute('src',source);
+  audio.play();
+}
+
 function initialPopup(tl, $translate, $ionicPopup, $state, $scope, paramTitle, paramTemplate){
   tl.pause();
   $translate([paramTitle, paramTemplate]).then(function(translations) {
