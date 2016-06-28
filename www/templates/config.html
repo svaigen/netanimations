@@ -10,9 +10,9 @@
         <div class="input-label">
           {{'LANGUAGE' | translate}}
         </div>
-        <select ng-model="language" ng-change="changeLanguage(language)">
-          <option value="pt-br">{{'PORTUGUESE' | translate}}</option>
-          <option value="en">{{'ENGLISH' | translate}}</option>
+        <select id="selectLang" ng-model="selectLang" ng-change="changeLanguage(selectLang)">
+          <option id="pt-br" value="pt-br"> {{'PORTUGUESE' | translate}}</option>
+          <option id="en" value="en">{{'ENGLISH' | translate}}</option>
         </select>
       </label>
       <label class="item item-toggle">

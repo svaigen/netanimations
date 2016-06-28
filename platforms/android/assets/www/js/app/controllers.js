@@ -1,21 +1,17 @@
 angular.module('netanimations.controllers', [])
 
-    .controller('AppCtrl', function($scope, $http, $state) {
-
-      document.addEventListener("deviceready", $state.go('app.config'), $state.go('app.about'));
-
+    .controller('AppCtrl', function($scope, $state, $translate,$window) {
       $scope.readPreference = function(){
-        /*$http.get('files/preferences.data')
-          .success(function(data, status, headers, config) {
-              if(!data){
-                $state.go('app.config');
-              }
-              if (data && status === 200) {
-                  //$scope.users = data.split(',');
-                  console.log("ok");
-              }
-          });*/
-      }
+        var preferencesCookie = $window.localStorage['preferences'];
+        if(!preferencesCookie){
+          $state.go('app.config');
+        } else {
+          $scope.language = preferencesCookie.split(",")[0];
+          $translate.use(preferencesCookie.split(",")[0]);
+          $scope.audiovisual = (preferencesCookie.split(",")[1] === "true")? true : false;
+        }
+      };
+
       $scope.audiovisual = true;
       $scope.language = "";
 
@@ -24,7 +20,7 @@ angular.module('netanimations.controllers', [])
 
     .controller('AnimationsCtrl', function() {})
 
-    .controller('ConfigCtrl', function($scope, $translate, $state) {
+    .controller('ConfigCtrl', function($scope, $translate, $state, $window) {
         $scope.changeLanguage = function (key) {
           $translate.use(key);
           $scope.language = key;
@@ -36,8 +32,8 @@ angular.module('netanimations.controllers', [])
         }
 
         $scope.savePreferences = function (){
-          var preferencesToWrite = $scope.language+","+$scope.audiovisual;
-
+          var preferencesCookie = $scope.language+","+$scope.audiovisual;
+          $window.localStorage['preferences'] = preferencesCookie;
           $state.go('app.animations');
         }
     })

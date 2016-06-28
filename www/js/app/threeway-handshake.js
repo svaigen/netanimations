@@ -1,7 +1,6 @@
 angular.module('netanimations.threewayhandshake', [])
 .controller('ThreeWayHandshakeCtrl', function($state, $scope, $ionicPopup, $translate) {
   $scope.end = false;
-  console.log($scope.audiovisual);
   var tl = new TimelineLite();
 
   $scope.restart = function () {

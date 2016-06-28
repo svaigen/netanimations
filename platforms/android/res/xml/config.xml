@@ -32,10 +32,6 @@
     <content src="index.html" />
     <icon src="www/img/icon.png" />
     <access origin="*" />
-    <icon density="ldpi" src="resources/android/neticons/drawable-ldpi-icon.png" />
-    <icon density="mdpi" src="resources/android/neticons/drawable-mdpi-icon.png" />
-    <icon density="hdpi" src="resources/android/neticons/drawable-hdpi-icon.png" />
-    <icon density="xhdpi" src="resources/android/neticons/drawable-xhdpi-icon.png" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
@@ -43,5 +39,4 @@
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
-    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root" />
 </widget>

@@ -1,42 +1,42 @@
 angular.module('netanimations.controllers', [])
 
-    .controller('AppCtrl', ['$cookieStore','$scope','$state', '$translate', function($cookieStore, $scope, $state, $translate) {
+    .controller('AppCtrl', function($scope, $state, $translate, $window) {
+
       $scope.readPreference = function(){
-        var preferencesCookie = $cookieStore.get("preferences");
+        var preferencesCookie = $window.localStorage['preferences'];
         if(!preferencesCookie){
+          $scope.audiovisual = true;
+          $scope.lang = "pt-br";
           $state.go('app.config');
         } else {
-          $scope.language = preferencesCookie.split(",")[0];
-          console.log($scope.language);
+          $scope.lang = preferencesCookie.split(",")[0].value;
           $translate.use(preferencesCookie.split(",")[0]);
           $scope.audiovisual = (preferencesCookie.split(",")[1] === "true")? true : false;
         }
       };
 
-      $scope.audiovisual = true;
-      $scope.language = "";
+      $scope.changeAudiovisual = function (key){
+        $scope.audiovisual = key;
+      }
 
       $scope.readPreference();
-    }])
+    })
 
     .controller('AnimationsCtrl', function() {})
 
-    .controller('ConfigCtrl', ['$cookieStore','$scope','$translate','$state',function($cookieStore, $scope, $translate, $state) {
+    .controller('ConfigCtrl', function($scope, $translate, $state, $window) {
+        $scope.selectLang = $translate.use();
+
         $scope.changeLanguage = function (key) {
           $translate.use(key);
-          $scope.language = key;
+          $scope.lang = key;
         };
 
-        $scope.changeAudiovisual = function (key){
-          $scope.audiovisual = key;
-          console.log($scope.audiovisual);
-        }
-
         $scope.savePreferences = function (){
-          var preferencesCookie = $scope.language+","+$scope.audiovisual;
-          $cookieStore.put('preferences',preferencesCookie);
+          var preferencesCookie = $scope.lang+","+$scope.audiovisual;
+          $window.localStorage['preferences'] = preferencesCookie;
           $state.go('app.animations');
         }
-    }])
+    })
 
     .controller('AboutCtrl', function() {});

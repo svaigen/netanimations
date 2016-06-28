@@ -16,14 +16,7 @@
   <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
   <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
-  <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,root"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
   </feature>
-  <platform name="android">
-    <icon src="resources/android/neticons/drawable-ldpi-icon.png" density="ldpi"/>
-    <icon src="resources/android/neticons/drawable-mdpi-icon.png" density="mdpi"/>
-    <icon src="resources/android/neticons/drawable-hdpi-icon.png" density="hdpi"/>
-    <icon src="resources/android/neticons/drawable-xhdpi-icon.png" density="xhdpi"/>
-  </platform>
 </widget>
