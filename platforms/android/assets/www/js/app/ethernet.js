@@ -47,6 +47,8 @@ angular.module('netanimations.ethernet', [])
   var ear3Top = transform(patternHeight, patternWidth, height, width, 410, 'y', false);
   var trashsLeft = transform(patternHeight, patternWidth, height, width, 175, 'x', false);
   var trash2Top = transform(patternHeight, patternWidth, height, width, 180, 'y', false);
+  var audio = document.createElement('audio');
+  var audiovisualPreference = $scope.audiovisual;
 
   var rotate90 = {rotation: 90};
   var rotate0 = {rotation: 0};
@@ -97,11 +99,20 @@ angular.module('netanimations.ethernet', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_4',"step3");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //putting segment1 in hostA's adapter
-  tl.set(segment1,{top:segHostATop});
-  tl.set(segment1,{left:segInitialLeft});
-  tl.to(segment1,1,{autoAlpha:1});
+
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/4-5.ogg')}});
+    //putting segment1 in hostA's adapter
+    tl.set(segment1,{top:segHostATop});
+    tl.set(segment1,{left:segInitialLeft});
+    tl.to('.bg',5,{});
+    tl.to(segment1,4,{autoAlpha:1});
+  }else{
+    //putting segment1 in hostA's adapter
+    tl.set(segment1,{top:segHostATop});
+    tl.set(segment1,{left:segInitialLeft});
+    tl.to(segment1,1,{autoAlpha:1});
+  }
 
   tl.add("step5");
   tl.call(function() {
@@ -113,35 +124,58 @@ angular.module('netanimations.ethernet', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_6',"step5");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //Host A preparing to send and Host B sending first
-  tl.set(ear1,{top:ear1Top,left:earLeft});
-  tl.set(ear2,{top:ear2Top,left:earLeft});
-  tl.set(ear3,{top:ear3Top,left:earLeft});
-  animateListen(tl,ear1,ear2,ear3,1);
-  tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
-  tl.set(segment3,{top:segHostBTop, left:segInitialLeft});
-  tl.to(segment2,1,{autoAlpha:1});
-  tl.to(segment3,1,{autoAlpha:1,delay:-1});
-  tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing});
-  tl.to(segment3,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
-  tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
-  tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/6-7.ogg')}});
+    //Host A preparing to send and Host B sending first
+    tl.set(ear1,{top:ear1Top,left:earLeft}).set(ear2,{top:ear2Top,left:earLeft}).set(ear3,{top:ear3Top,left:earLeft});
+    animateListen(tl,ear1,ear2,ear3,2);
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft}).set(segment3,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,2,{autoAlpha:1});
+    tl.to(segment3,2,{autoAlpha:1,delay:-2});
+    tl.to(segment2,2.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment3,2.5,{left:"+="+segHorizontalCrossing,delay:-2.5});
+    tl.to(segment2,2.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment3,2.5,{top:"-="+segVerticalUpCrossing,delay:-2.5});
+  }else{
+    //Host A preparing to send and Host B sending first
+    tl.set(ear1,{top:ear1Top,left:earLeft}).set(ear2,{top:ear2Top,left:earLeft}).set(ear3,{top:ear3Top,left:earLeft});
+    animateListen(tl,ear1,ear2,ear3,1);
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft}).set(segment3,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,1,{autoAlpha:1});
+    tl.to(segment3,1,{autoAlpha:1,delay:-1});
+    tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
+    tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
+  }
+
 
   tl.add("step7");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_7',"step6");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //sending packages of host B and discarding from host A
-  tl.to(segment1,1,{autoAlpha:0});
-  tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
-  tl.to(segment3,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
-  tl.to(trash1,1.5,{autoAlpha:1, delay:-1.5});
-  tl.to(segment3,1,{top:"-="+segDiscard});
-  tl.to(segment3,1,{autoAlpha:0});
-  tl.to(segment2,1,{autoAlpha:0,delay:-1});
-  tl.to(trash1,1,{autoAlpha:0,delay:-1});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/7-8.ogg')}});
+    //sending packages of host B and discarding from host A
+    tl.to(segment1,5,{autoAlpha:0});
+    tl.to(segment2,5,{left:"-="+segHorizontalCrossing});
+    tl.to(segment3,5,{left:"-="+segHorizontalCrossing,delay:-5});
+    tl.to(trash1,1.5,{autoAlpha:1, delay:-1.5});
+    tl.to(segment3,2,{top:"-="+segDiscard});
+    tl.to(segment3,1,{autoAlpha:0});
+    tl.to(segment2,1,{autoAlpha:0,delay:-1});
+    tl.to(trash1,1,{autoAlpha:0,delay:-1});
+  }else{
+    //sending packages of host B and discarding from host A
+    tl.to(segment1,1,{autoAlpha:0});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
+    tl.to(trash1,1.5,{autoAlpha:1, delay:-1.5});
+    tl.to(segment3,1,{top:"-="+segDiscard});
+    tl.to(segment3,1,{autoAlpha:0});
+    tl.to(segment2,1,{autoAlpha:0,delay:-1});
+    tl.to(trash1,1,{autoAlpha:0,delay:-1});
+  }
 
   tl.add("step8");
   tl.call(function() {
@@ -153,22 +187,40 @@ angular.module('netanimations.ethernet', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_9',"step8");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //sending from host A to host C
-  tl.to(segment1,1,{autoAlpha:1});
-  tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
-  tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
-  tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
-    left:segInitialLeft+segHorizontalCrossing,
-    autoAlpha:1});
-  tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
-  tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
-  tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
-  tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
-  tl.to(segment2,1,{top:"-="+segDiscard});
-  tl.to(segment1,1,{autoAlpha:0,delay:-1});
-  tl.to(segment2,1,{autoAlpha:0});
-  tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/9-10.ogg')}});
+    //sending from host A to host C
+    tl.to(segment1,1,{autoAlpha:1});
+    tl.to(segment1,2.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment1,2.5,{top:"+="+segVerticalUpCrossing});
+    tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
+      left:segInitialLeft+segHorizontalCrossing,
+      autoAlpha:1});
+    tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
+    tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment2,1,{top:"-="+segDiscard});
+    tl.to(segment1,1,{autoAlpha:0,delay:-1});
+    tl.to(segment2,1,{autoAlpha:0});
+    tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  }else{
+    //sending from host A to host C
+    tl.to(segment1,1,{autoAlpha:1});
+    tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
+    tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
+      left:segInitialLeft+segHorizontalCrossing,
+      autoAlpha:1});
+    tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
+    tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment2,1,{top:"-="+segDiscard});
+    tl.to(segment1,1,{autoAlpha:0,delay:-1});
+    tl.to(segment2,1,{autoAlpha:0});
+    tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  }
 
   tl.add("step10");
   tl.call(function() {
@@ -180,53 +232,93 @@ angular.module('netanimations.ethernet', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_11',"step10");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //putting segment1 in hostA's adapter
-  tl.set(segment1,{top:segHostATop});
-  tl.set(segment1,{left:segInitialLeft});
-  tl.to(segment1,1,{autoAlpha:1});
-  tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/11-12.ogg')}});
+    //putting segment1 in hostA's adapter
+    tl.set(segment1,{top:segHostATop});
+    tl.set(segment1,{left:segInitialLeft});
+    tl.to(segment1,1,{autoAlpha:1});
+    tl.to(segment1,5,{left:"+="+segHorizontalCrossing});
+  }else{
+    //putting segment1 in hostA's adapter
+    tl.set(segment1,{top:segHostATop});
+    tl.set(segment1,{left:segInitialLeft});
+    tl.to(segment1,1,{autoAlpha:1});
+    tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
+  }
 
   tl.add("step12");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_12',"step11");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //crashing frame from host A and B
-  tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
-  tl.to(segment2,0.5,{autoAlpha:1});
-  tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
-  tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/12-13.ogg')}});
+    //crashing frame from host A and B
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,0.5,{autoAlpha:1});
+    tl.to(segment1,8,{top:"+="+segVerticalUpCrossing});
+    tl.to(segment2,8,{left:"+="+segHorizontalCrossing,delay:-8});
+  }else{
+    //crashing frame from host A and B
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,0.5,{autoAlpha:1});
+    tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
+    tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
+  }
 
   tl.add("step13");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_13',"step12");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //throwing out the crashed frames
-  tl.to(trash2,0.5,{autoAlpha:1});
-  tl.to(segment1,1.5,{top:trash2Top,left:trashsLeft,delay:-0.5});
-  tl.to(segment2,1.5,{top:trash2Top,left:trashsLeft,delay:-1.2});
-  tl.set(trash2,{autoAlpha:0});
-  tl.set(segment1,{autoAlpha:0});
-  tl.set(segment2,{autoAlpha:0});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/13-14.ogg')}});
+    //throwing out the crashed frames
+    tl.to(trash2,3,{autoAlpha:1});
+    tl.to(segment1,1.5,{top:trash2Top,left:trashsLeft,delay:-3});
+    tl.to(segment2,1.5,{top:trash2Top,left:trashsLeft,delay:-1.2});
+    tl.set(trash2,{autoAlpha:0});
+    tl.set(segment1,{autoAlpha:0});
+    tl.set(segment2,{autoAlpha:0});
+  }else{
+    //throwing out the crashed frames
+    tl.to(trash2,0.5,{autoAlpha:1});
+    tl.to(segment1,1.5,{top:trash2Top,left:trashsLeft,delay:-0.5});
+    tl.to(segment2,1.5,{top:trash2Top,left:trashsLeft,delay:-1.2});
+    tl.set(trash2,{autoAlpha:0});
+    tl.set(segment1,{autoAlpha:0});
+    tl.set(segment2,{autoAlpha:0});
+  }
 
   tl.add("step14");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_14',"step13");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //Host B sends a collision signal
-  tl.set(collision1,{top:segHostBTop, left: segInitialLeft});
-  tl.to(collision1,0.5,{autoAlpha:1});
-  tl.to(collision1,1.5,{left:"+="+segHorizontalCrossing});
-  tl.set(collision2,{top:segHostBTop, left:segInitialLeft+segHorizontalCrossing, autoAlpha:1});
-  tl.to(collision1,1.5,{top:"-="+segVerticalUpCrossing});
-  tl.to(collision2,1.5,{top:"+="+segVerticalDownCrossing,delay:-1.5});
-  tl.to(collision1,1.5,{left:"-="+segHorizontalCrossing});
-  tl.to(collision2,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
-  tl.to(collision1,0.5,{autoAlpha:0});
-  tl.to(collision2,0.5,{autoAlpha:0, delay:-0.5});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/14-15.ogg')}});
+    //Host B sends a collision signal
+    tl.set(collision1,{top:segHostBTop, left: segInitialLeft});
+    tl.to(collision1,2,{autoAlpha:1});
+    tl.to(collision1,4,{left:"+="+segHorizontalCrossing});
+    tl.set(collision2,{top:segHostBTop, left:segInitialLeft+segHorizontalCrossing, autoAlpha:1});
+    tl.to(collision1,1.5,{top:"-="+segVerticalUpCrossing});
+    tl.to(collision2,1.5,{top:"+="+segVerticalDownCrossing,delay:-1.5});
+    tl.to(collision1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(collision2,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
+    tl.to(collision1,1,{autoAlpha:0});
+    tl.to(collision2,1,{autoAlpha:0, delay:-1});
+  }else{
+    //Host B sends a collision signal
+    tl.set(collision1,{top:segHostBTop, left: segInitialLeft});
+    tl.to(collision1,0.5,{autoAlpha:1});
+    tl.to(collision1,1.5,{left:"+="+segHorizontalCrossing});
+    tl.set(collision2,{top:segHostBTop, left:segInitialLeft+segHorizontalCrossing, autoAlpha:1});
+    tl.to(collision1,1.5,{top:"-="+segVerticalUpCrossing});
+    tl.to(collision2,1.5,{top:"+="+segVerticalDownCrossing,delay:-1.5});
+    tl.to(collision1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(collision2,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
+    tl.to(collision1,0.5,{autoAlpha:0});
+    tl.to(collision2,0.5,{autoAlpha:0, delay:-0.5});
+  }
 
   tl.add("step15");
   tl.call(function() {
@@ -238,44 +330,81 @@ angular.module('netanimations.ethernet', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_16',"step15");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //correct Host A's transmission
-  tl.set(segment1,{top:segHostATop, left: segInitialLeft});
-  tl.to(segment1,0.5,{autoAlpha:1});
-  tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
-  tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
-  tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
-    left:segInitialLeft+segHorizontalCrossing,
-    autoAlpha:1});
-  tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
-  tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
-  tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
-  tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
-  tl.to(segment2,1,{top:"-="+segDiscard});
-  tl.to(segment1,1,{autoAlpha:0,delay:-1});
-  tl.to(segment2,1,{autoAlpha:0});
-  tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  if (audiovisualPreference) {
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/16-17.ogg')}});
+    //correct Host A's transmission
+    tl.set(segment1,{top:segHostATop, left: segInitialLeft});
+    tl.to(segment1,1,{autoAlpha:1});
+    tl.to(segment1,2.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment1,2.5,{top:"+="+segVerticalUpCrossing});
+    tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
+      left:segInitialLeft+segHorizontalCrossing,
+      autoAlpha:1});
+    tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
+    tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment2,1,{top:"-="+segDiscard});
+    tl.to(segment1,1,{autoAlpha:0,delay:-1});
+    tl.to(segment2,1,{autoAlpha:0});
+    tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  }else{
+    //correct Host A's transmission
+    tl.set(segment1,{top:segHostATop, left: segInitialLeft});
+    tl.to(segment1,0.5,{autoAlpha:1});
+    tl.to(segment1,1.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment1,1.5,{top:"+="+segVerticalUpCrossing});
+    tl.set(segment2,{top:segVerticalUpCrossing+segHostATop,
+      left:segInitialLeft+segHorizontalCrossing,
+      autoAlpha:1});
+    tl.to(segment1,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing, delay:-1.5});
+    tl.to(segment1,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(trash2,1.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment2,1,{top:"-="+segDiscard});
+    tl.to(segment1,1,{autoAlpha:0,delay:-1});
+    tl.to(segment2,1,{autoAlpha:0});
+    tl.to(trash2,1,{autoAlpha:0,delay:-1});
+  }
 
   tl.add("step17");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'ETHERNET_PRESENTATION_17',"step16");
   });
-  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
-  //correct Host B's transmission
-  tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
-  tl.set(segment3,{top:segHostBTop, left:segInitialLeft});
-  tl.to(segment2,1,{autoAlpha:1});
-  tl.to(segment3,1,{autoAlpha:1,delay:-1});
-  tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing});
-  tl.to(segment3,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
-  tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
-  tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
-  tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
-  tl.to(segment3,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
-  tl.to(trash1,0.5,{autoAlpha:1,delay:-1.5});
-  tl.to(segment3,1,{top:"-="+segDiscard});
-  tl.to(segment2,0.5,{autoAlpha:0});
-  tl.to(trash1,0.5,{autoAlpha:0,delay:-0.5});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/ethernet/17-18.ogg')}});
+    //correct Host B's transmission
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
+    tl.set(segment3,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,2,{autoAlpha:1});
+    tl.to(segment3,2,{autoAlpha:1,delay:-2});
+    tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
+    tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
+    tl.to(trash1,0.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment3,3,{top:"-="+segDiscard});
+    tl.to(segment2,2,{autoAlpha:0});
+    tl.to(trash1,2,{autoAlpha:0,delay:-2});
+  }else{
+    //correct Host B's transmission
+    tl.set(segment2,{top:segHostBTop, left:segInitialLeft});
+    tl.set(segment3,{top:segHostBTop, left:segInitialLeft});
+    tl.to(segment2,1,{autoAlpha:1});
+    tl.to(segment3,1,{autoAlpha:1,delay:-1});
+    tl.to(segment2,1.5,{left:"+="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"+="+segHorizontalCrossing,delay:-1.5});
+    tl.to(segment2,1.5,{top:"+="+segVerticalDownCrossing});
+    tl.to(segment3,1.5,{top:"-="+segVerticalUpCrossing,delay:-1.5});
+    tl.to(segment2,1.5,{left:"-="+segHorizontalCrossing});
+    tl.to(segment3,1.5,{left:"-="+segHorizontalCrossing,delay:-1.5});
+    tl.to(trash1,0.5,{autoAlpha:1,delay:-1.5});
+    tl.to(segment3,1,{top:"-="+segDiscard});
+    tl.to(segment2,0.5,{autoAlpha:0});
+    tl.to(trash1,0.5,{autoAlpha:0,delay:-0.5});
+  }
 
   tl.add("step18");
   tl.call(function() {

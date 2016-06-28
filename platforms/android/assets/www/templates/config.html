@@ -16,20 +16,17 @@
         </select>
       </label>
       <label class="item item-toggle">
-        Acessibilidade
+        {{'ACCESSIBILITY' | translate}}
         <label class="toggle toggle-dark">
-          <input type="checkbox">
+          <input ng-model="audiovisual" ng-change="changeAudiovisual(audiovisual)" type="checkbox">
           <div class="track">
             <div class="handle"></div>
           </div>
         </label>
       </label>
-      <button class="button button-block button-positive">
+      <button class="button button-block button-positive" ng-click="savePreferences()">
         {{'SAVE' | translate}}
       </button>
-      <a nav-clear href="#/app/animations" class="button button-block button-stable">
-        {{'BACK' | translate}}
-      </a>
     </div>
 
   </ion-content>

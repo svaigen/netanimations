@@ -1,7 +1,7 @@
 angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalprecht.translate',
 'netanimations.threewayhandshake', 'netanimations.sequencenumber', 'netanimations.purealoha',
  'netanimations.hybridmodel', 'netanimations.intraasrouting','netanimations.interasrouting',
- 'netanimations.ethernet'])
+ 'netanimations.ethernet','ngCookies'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {

@@ -10,7 +10,7 @@
         <div class="input-label">
           {{'LANGUAGE' | translate}}
         </div>
-        <select ng-model="language" ng-init="language='pt-br'" ng-change="changeLanguage(language)">
+        <select ng-model="language" ng-change="changeLanguage(language)">
           <option value="pt-br">{{'PORTUGUESE' | translate}}</option>
           <option value="en">{{'ENGLISH' | translate}}</option>
         </select>
@@ -24,12 +24,9 @@
           </div>
         </label>
       </label>
-      <button class="button button-block button-positive">
+      <button class="button button-block button-positive" ng-click="savePreferences()">
         {{'SAVE' | translate}}
       </button>
-      <a nav-clear href="#/app/animations" class="button button-block button-stable">
-        {{'BACK' | translate}}
-      </a>
     </div>
 
   </ion-content>

@@ -5,6 +5,11 @@
     margin:20px auto;
 }
 
+.segment{
+  text-align: left;
+
+}
+
 .sn-bg {
     background-image:url("../img/sequence-number/sn-bg.svg");
 }

@@ -229,6 +229,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     END: 'Fim',
     SAVE: 'Salvar',
     BACK: 'Voltar',
+    ACCESSIBILITY: 'Acessibilidade audiovisual',
 
     ABOUT_APP: 'Sobre o aplicativo',
     ABOUT_LEAD: 'Um projeto do Departamento de Informática - UEM',

@@ -502,7 +502,7 @@ angular.module('netanimations.hybridmodel', [])
     tl.to(focus,1,{top:"+="+transform(patternHeight, patternWidth, height, width, 200, 'y', false)});
 
     /*Segments appear in pipe (second piece)*/
-    tl.set(message,pipePosition2).set(segment1,0,pipePosition2).set(segment2,pipePosition2).set(segment3,pipePosition2).set(segment4,pipePosition2);
+    tl.set(message,pipePosition2).set(segment1,pipePosition2).set(segment2,pipePosition2).set(segment3,pipePosition2).set(segment4,pipePosition2);
     tl.set(segment4,show).set(segment3,show).set(segment2,show).set(segment1,show).set(message,show);
     tl.to(segment4,1,sendDown);
     tl.to(segment4,1,sendDown);

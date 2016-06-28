@@ -26,7 +26,7 @@ angular.module('netanimations.purealoha', [])
   var show = {opacity: 1};
   var downScale = height * 0.23;
   var downScale2 = height * 0.3;
-  var rightAndLeftScale = transform(patternHeight, patternWidth, height, width, 118, 'x',false);
+  var rightAndLeftScale = transform(patternHeight, patternWidth, height, width, 105, 'x',false);
   var colisionMovementScale = transform(patternHeight, patternWidth, height, width, 40, 'y', false);
   var crossingPipeScale = transform(patternHeight, patternWidth, height, width, 360, 'y', false);
   var sendDown = {top: "+="+downScale};
@@ -34,6 +34,8 @@ angular.module('netanimations.purealoha', [])
   var sendRight = {left: "+="+rightAndLeftScale};
   var sendLeft = {left: "-="+rightAndLeftScale};
   var tl = new TimelineMax();
+  var audio = document.createElement('audio');
+  var audiovisualPreference = $scope.audiovisual;
 
   tl.to(segment1,0, {width:boxWidth});
   tl.to(segment2,0, {width:boxWidth});
@@ -60,9 +62,17 @@ angular.module('netanimations.purealoha', [])
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_3',"step2");
   });
   //Host A sends first segment
-  tl.to(segment1, 2, sendRight);
-  tl.to(segment1, 0.5, rotate90);
-  tl.to(segment1, 2, sendDown);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/aloha/3-4.ogg')}});
+    tl.to(segment1, 2, sendRight);
+    tl.to(segment1, 1, rotate90);
+    tl.to(segment1, 2, sendDown);
+  }else{
+    tl.to(segment1, 2, sendRight);
+    tl.to(segment1, 0.5, rotate90);
+    tl.to(segment1, 2, sendDown);
+  }
+
 
   tl.add("step4");
   tl.call(function() {
@@ -75,26 +85,49 @@ angular.module('netanimations.purealoha', [])
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_5',"step4");
   });
   //Host B sends a segment and there's a colision
-  tl.to(segment2, 0.5, show);
-  tl.to(segment2, 2, sendRight);
-  tl.to(segment1, 2, {top:"+="+colisionMovementScale, delay: -2});
-  tl.to(segment1, 1, {scale:0, opacity:0});
-  tl.to(segment2, 1, {scale:0, opacity:0, delay: -1});
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/aloha/5-6.ogg')}});
+    tl.to(segment2, 0.5, show);
+    tl.to(segment2, 2, sendRight);
+    tl.to(segment1, 4, {top:"+="+colisionMovementScale, delay: -2});
+    tl.to(segment1, 1, {scale:0, opacity:0});
+    tl.to(segment2, 1, {scale:0, opacity:0, delay: -1});
+  }else{
+    tl.to(segment2, 0.5, show);
+    tl.to(segment2, 2, sendRight);
+    tl.to(segment1, 2, {top:"+="+colisionMovementScale, delay: -2});
+    tl.to(segment1, 1, {scale:0, opacity:0});
+    tl.to(segment2, 1, {scale:0, opacity:0, delay: -1});
+  }
+
 
   tl.add("step6");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_6',"step5");
   });
   //Host A sends the segment to Host C
-  tl.to(segment1, 0, initialPosition1);
-  tl.to(segment1, 0, rotate0);
-  tl.to(segment1, 0, {scale: 1, opacity: 1});
-  tl.to(segment1, 2, sendRight);
-  tl.to(segment1, 0.5, rotate90);
-  tl.to(segment1, 4, {top: "+="+crossingPipeScale});
-  tl.to(segment1, 0.5, rotate0);
-  tl.to(segment1, 2, sendLeft);
-  tl.to(segment1, 0.5, hide);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/aloha/6-7.ogg')}});
+    tl.to(segment1, 0.1, initialPosition1);
+    tl.to(segment1, 0.1, rotate0);
+    tl.to(segment1, 0.1, {scale: 1, opacity: 1});
+    tl.to(segment1, 2, sendRight);
+    tl.to(segment1, 0.5, rotate90);
+    tl.to(segment1, 2, {top: "+="+crossingPipeScale});
+    tl.to(segment1, 0.5, rotate0);
+    tl.to(segment1, 2, sendLeft);
+    tl.to(segment1, 0.5, hide);
+  }else{
+    tl.to(segment1, 0, initialPosition1);
+    tl.to(segment1, 0, rotate0);
+    tl.to(segment1, 0, {scale: 1, opacity: 1});
+    tl.to(segment1, 2, sendRight);
+    tl.to(segment1, 0.5, rotate90);
+    tl.to(segment1, 4, {top: "+="+crossingPipeScale});
+    tl.to(segment1, 0.5, rotate0);
+    tl.to(segment1, 2, sendLeft);
+    tl.to(segment1, 0.5, hide);
+  }
 
   tl.add("step7");
   tl.call(function() {
@@ -107,15 +140,28 @@ angular.module('netanimations.purealoha', [])
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_8',"step7");
   });
   //Host B sends segment to Host C
-  tl.to(segment2, 0, initialPosition2);
-  tl.to(segment2, 0, rotate0);
-  tl.to(segment2, 0, {scale: 1, opacity: 1});
-  tl.to(segment2, 2, sendRight);
-  tl.to(segment2, 0.5, rotate90);
-  tl.to(segment2, 2, sendDown2);
-  tl.to(segment2, 0.5, rotate0);
-  tl.to(segment2, 2, sendLeft);
-  tl.to(segment2, 1, hide);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/aloha/8-9.ogg')}});
+    tl.to(segment2, 0.1, initialPosition2);
+    tl.to(segment2, 0.1, rotate0);
+    tl.to(segment2, 0.1, {scale: 1, opacity: 1});
+    tl.to(segment2, 1, sendRight);
+    tl.to(segment2, 0.5, rotate90);
+    tl.to(segment2, 1, sendDown2);
+    tl.to(segment2, 0.5, rotate0);
+    tl.to(segment2, 1, sendLeft);
+    tl.to(segment2, 1, hide);
+  }else{
+    tl.to(segment2, 0, initialPosition2);
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, {scale: 1, opacity: 1});
+    tl.to(segment2, 2, sendRight);
+    tl.to(segment2, 0.5, rotate90);
+    tl.to(segment2, 2, sendDown2);
+    tl.to(segment2, 0.5, rotate0);
+    tl.to(segment2, 2, sendLeft);
+    tl.to(segment2, 1, hide);
+  }
 
   tl.call(function() {
     endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step8","step1");

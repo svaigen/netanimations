@@ -29,103 +29,170 @@ angular.module('netanimations.sequencenumber', [])
   var show = {className:"ng-show"};
   var sendBottom = {y: bottom};
   var sendTop = {y: top};
+  var audio = document.createElement('audio');
+  var audiovisualPreference = $scope.audiovisual;
+
+  tl.set(segment1, {y:top, width:segmentInitialSize})
+    .set(segment2,{y:top, width:segmentInitialSize});
 
   tl.add("step1");
   tl.call( function(){
     initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_1');
   });
-  tl.to(segment1, 0.5, {y:top});
-  tl.to(segment1, 0.5, {width:segmentInitialSize});
-  //tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_2',"step1");
   });
-  tl.to(segment2, 0.5, {y:top});
-  tl.to(segment2, 0.5, {width:segmentInitialSize});
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_3',"step2");
   });
 
-  tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step4");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_4',"step3");
   });
-  tl.to(segment1, 0.5, {width: 50}); //dummy step - do not remove
+  tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step5");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_5',"step4");
   });
-  tl.to(segment1, 1, sendTop);
-  tl.to(segment1, 1, show);
-  tl.to(segment1, 1, zoomIn);
+
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/5-6.ogg')}});
+    tl.to(segment1, 2, sendTop);
+    tl.to(segment1, 3, show);
+    tl.to(segment1, 2, zoomIn);
+  }else{
+    tl.to(segment1, 1, sendTop);
+    tl.to(segment1, 1, show);
+    tl.to(segment1, 1, zoomIn);
+  }
 
   tl.add("step6");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT_1', 'SEQUENCE_NUMBER_PRESENTATION_6',"step5");
   });
 
-  tl.to(segment1, 1, zoomOutAndRotate90);
-  tl.to(segment1, 3, sendBottom);
-  tl.to(segment1, 0, hide);
+
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(segment1, 1, zoomOutAndRotate90);
+    tl.to(segment1, 3, sendBottom);
+    tl.to(segment1, 0, hide);
+  }else{
+    tl.to(segment1, 1, zoomOutAndRotate90);
+    tl.to(segment1, 3, sendBottom);
+    tl.to(segment1, 0, hide);
+  }
+
 
   tl.add("step7");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_7',"step6");
   });
 
-  //initial position of segment 2
-  tl.to(segment2, 0, sendBottom);
-  tl.to(segment2, 1, show);
-  tl.to(segment2, 1, zoomIn);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/7-8.ogg')}});
+    //initial position of segment 2
+    tl.to(segment2, 0, sendBottom);
+    tl.to(segment2, 4, show);
+    tl.to(segment2, 4, zoomIn);
+  }else{
+    //initial position of segment 2
+    tl.to(segment2, 0, sendBottom);
+    tl.to(segment2, 1, show);
+    tl.to(segment2, 1, zoomIn);
+  }
 
   tl.add("step8");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_8',"step7");
   });
-  tl.to(segment2, 1, zoomOutAndRotate90);
-  tl.to(segment2, 3, sendTop);
-  tl.to(segment2, 0, hide);
+
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/8-9.ogg')}});
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendTop);
+    tl.to(segment2, 0, hide);
+  }else{
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendTop);
+    tl.to(segment2, 0, hide);
+  }
+
 
   tl.add("step9");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_9',"step8");
   });
-  tl.to(segment2, 0, rotate0);
-  tl.to(segment2, 0, show);
-  tl.to(segment2, 1, zoomIn);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/9-10.ogg')}});
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 8, zoomIn);
+  }else{
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 1, zoomIn);
+  }
 
   tl.add("step10");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_10',"step9");
   });
-  tl.to(segment2, 1, zoomOutAndRotate90);
-  tl.to(segment2, 3, sendBottom);
-  tl.to(segment2, 0, hide);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }else{
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }
+
 
   tl.add("step11");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_11',"step10");
   });
-  //origem mostra outro pacote
-  tl.to(segment2, 0, rotate0);
-  tl.to(segment2, 0, sendTop);
-  tl.to(segment2, 0, show);
-  tl.to(segment2, 1, zoomIn);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12 14-15.ogg')}});
+    //origem mostra outro pacote
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, sendTop);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 8, zoomIn);
+  }else{
+    //origem mostra outro pacote
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, sendTop);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 1, zoomIn);
+  }
 
   tl.add("step12");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_12',"step11");
   });
-  tl.to(segment2, 1, zoomOutAndRotate90);
-  tl.to(segment2, 3, sendBottom);
-  tl.to(segment2, 0, hide);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }else{
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }
 
   tl.add("step13");
   tl.call(function() {
@@ -138,19 +205,37 @@ angular.module('netanimations.sequencenumber', [])
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_14',"step13");
   });
-  //origin shows another segment
-  tl.to(segment2, 0, sendTop);
-  tl.to(segment2, 0, rotate0);
-  tl.to(segment2, 0, show);
-  tl.to(segment2, 1, zoomIn);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12 14-15.ogg')}});
+    //origin shows another segment
+    tl.to(segment2, 0, sendTop);
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 1, zoomIn);
+  }else{
+    //origin shows another segment
+    tl.to(segment2, 0, sendTop);
+    tl.to(segment2, 0, rotate0);
+    tl.to(segment2, 0, show);
+    tl.to(segment2, 8, zoomIn);
+  }
+
 
   tl.add("step15");
   tl.call(function() {
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_15',"step14");
   });
-  tl.to(segment2, 1, zoomOutAndRotate90);
-  tl.to(segment2, 3, sendBottom);
-  tl.to(segment2, 0, hide);
+  if(audiovisualPreference){
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }else{
+    tl.to(segment2, 1, zoomOutAndRotate90);
+    tl.to(segment2, 3, sendBottom);
+    tl.to(segment2, 0, hide);
+  }
+
 
   //end
   tl.call(function() {
