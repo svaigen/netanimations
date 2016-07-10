@@ -83,7 +83,7 @@ angular.module('netanimations.sequencenumber', [])
 
 
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
     tl.to(segment1, 1, zoomOutAndRotate90);
     tl.to(segment1, 3, sendBottom);
     tl.to(segment1, 0, hide);
@@ -149,7 +149,7 @@ angular.module('netanimations.sequencenumber', [])
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_10',"step9");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
     tl.to(segment2, 1, zoomOutAndRotate90);
     tl.to(segment2, 3, sendBottom);
     tl.to(segment2, 0, hide);
@@ -165,7 +165,7 @@ angular.module('netanimations.sequencenumber', [])
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_11',"step10");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12 14-15.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12_14-15.ogg')}});
     //origem mostra outro pacote
     tl.to(segment2, 0, rotate0);
     tl.to(segment2, 0, sendTop);
@@ -184,7 +184,7 @@ angular.module('netanimations.sequencenumber', [])
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_12',"step11");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
     tl.to(segment2, 1, zoomOutAndRotate90);
     tl.to(segment2, 3, sendBottom);
     tl.to(segment2, 0, hide);
@@ -206,7 +206,7 @@ angular.module('netanimations.sequencenumber', [])
     commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_14',"step13");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12 14-15.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12_14-15.ogg')}});
     //origin shows another segment
     tl.to(segment2, 0, sendTop);
     tl.to(segment2, 0, rotate0);
@@ -226,7 +226,7 @@ angular.module('netanimations.sequencenumber', [])
     commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_15',"step14");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7 10-11 12-3 15-6.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
     tl.to(segment2, 1, zoomOutAndRotate90);
     tl.to(segment2, 3, sendBottom);
     tl.to(segment2, 0, hide);

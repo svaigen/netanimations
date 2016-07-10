@@ -1,0 +1,48 @@
+<ion-view title="{{'MAP' | translate}}">
+  <ion-nav-buttons side="left">
+    <button id="mapmenu" menu-toggle="left" class="button button-icon icon ion-navicon"
+      aria-label="menu" aria-flowto="map-desc" aria-controls="menuInit" aria-expanded="false"
+      tabindex="0" role="button" ng-click="setFocus('menutab','mapmenu')"></button>
+  </ion-nav-buttons>
+  <ion-content class="has-header">
+    <div class="list card">
+      <div id="map-desc" tabindex="0" aria-flowto="divider-animations" class="item item-text-wrap">
+        <p>{{'MAP_DESCRIPTION' | translate}}<p>
+      </div>
+      <div id="divider-animations" tabindex="0" aria-flowto="map-twhs" class="item item-divider">
+          {{'ANIMATIONS' | translate}}
+      </div>
+      <div class="item item-text-wrap">
+        <ion-list>
+          <a role="link" id="map-twhs" tabindex="0" aria-flowto="map-sn" class="item "href="#/app/three-way-handshake">{{'THREEWAY_HANDSHAKE' | translate}}</a>
+          <a role="link" id="map-sn" tabindex="0" aria-flowto="map-pa" class="item "href="#/app/sequence-number">{{'SEQUENCE_NUMBER_TITLE' | translate}}</a>
+          <a role="link" id="map-pa" tabindex="0" aria-flowto="map-hm" class="item "href="#/app/pure-aloha">{{'PURE_ALOHA_TITLE' | translate}}</a>
+          <a role="link" id="map-hm" tabindex="0" aria-flowto="map-intra" class="item "href="#/app/hybrid-model">{{'HYBRID_MODEL_TITLE' | translate}}</a>
+          <a role="link" id="map-intra" tabindex="0" aria-flowto="map-inter" class="item "href="#/app/intra-as-routing">{{'INTRA_AS_TITLE' | translate}}</a>
+          <a role="link" id="map-inter" tabindex="0" aria-flowto="map-ethernet" class="item "href="#/app/inter-as-routing">{{'INTER_AS_TITLE' | translate}}</a>
+          <a role="link" id="map-ethernet" tabindex="0" aria-flowto="divider-config" class="item "href="#/app/ethernet">{{'ETHERNET_TITLE' | translate}}</a>
+        </ion-list>
+      </div>
+      <a role="link" id="divider-config" tabindex="0" aria-flowto="divider-about" href="#/app/config">
+        <div class="item item-divider">
+          {{'CONFIGS' | translate}}
+        </div>
+        <div class="item item-text-wrap">
+          <ion-list>
+            <p> {{'MAP_CONFIGS' | translate}} </p>
+          </ion-list>
+        </div>
+      </a>
+      <a role="link" id="divider-about" aria-flowto="mapmenu" href="#/app/about">
+        <div class="item item-divider">
+          {{'ABOUT' | translate}}
+        </div>
+        <div class="item item-text-wrap">
+          <ion-list>
+            <p> {{'MAP_ABOUT' | translate}} </p>
+          </ion-list>
+        </div>
+      </a>
+    </div>
+  </ion-content>
+</ion-view>

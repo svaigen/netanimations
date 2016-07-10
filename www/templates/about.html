@@ -1,44 +1,43 @@
 <ion-view title="Sobre">
   <ion-nav-buttons side="left">
-    <button menu-toggle="left" class="button button-icon icon ion-navicon"></button>
-  </ion-nav-buttons>
+    <button menu-toggle="left" id="aboutmenu" class="button button-icon icon ion-navicon"
+      aria-label="menu" aria-flowto="netanimations-desc" aria-controls="menuInit" aria-expanded="false"
+      tabindex="0" role="button" ng-click="setFocus('menutab','aboutmenu')"> </button>  </ion-nav-buttons>
   <ion-content class="has-header">
 
       <div class="list card">
-
-          <div class="item item-avatar item-text-wrap">
-              <img src="img/icon.png">
+          <div id="netanimations-desc" tabindex="0" aria-flowto="about-divider" class="item item-avatar item-text-wrap">
+              <img alt="{{'ABOUT_ICON' | translate}}" src="img/icon.png">
               <h2>NetAnimations</h2>
               <p>{{'ABOUT_LEAD' | translate}}</p>
           </div>
 
-          <div class="item item-icon-left item-divider">
-              <i class="icon ion-information-circled"></i>
+          <div id="about-divider" tabindex="0" aria-flowto="about-desc"class="item item-icon-left item-divider">
+              <i alt="{{'ABOUT_ICON_INFO' | translate}}" class="icon ion-information-circled"></i>
               {{'ABOUT_APP' | translate}}
           </div>
-          <div class="item item-text-wrap">
+          <div id="about-desc" tabindex="0" aria-flowto="creator-divider" class="item item-text-wrap">
               <p>{{'ABOUT_TEXT' | translate}}</p>
           </div>
-          <div class="item item-divider">
+          <div id="creator-divider" tabindex="0" aria-flowto="about-creator" class="item item-divider">
             {{'ABOUT_CREATOR' | translate}}
           </div>
-          <div class="item item-text-wrap">
+          <div id="about-creator" tabindex="0" aria-flowto="developer-divider" class="item item-text-wrap">
               <p>Luciana Andréia Fondazzi Martimiano - UEM</p>
-
           </div>
-          <div class="item item-divider">
+          <div id="developer-divider" tabindex="0" aria-flowto="about-developer" class="item item-divider">
             {{'ABOUT_DEVELOPER' | translate}}
           </div>
-          <div class="item item-text-wrap">
+          <div id="about-developer" tabindex="0" aria-flowto="about-icons" class="item item-text-wrap">
               <p>
                 Jonathan Rodrigues de Oliveira (2014) <br/>
                 Alisson Renan Svaigen (2015 - 2016)
               </p>
           </div>
 
-          <a class="item item-icon-left assertive" href="#">
-              <img src="img/uem.png" width="100px">
-              <img src="img/din.gif" width="100px">
+          <a id="about-icons" tabindex="0" aria-flowto="aboutmenu"class="item item-icon-left assertive" href="#">
+              <img alt="{{'ABOUT_UEM' | translate}}" src="img/uem.png" width="100px">
+              <img alt="{{'ABOUT_DIN' | translate}}" src="img/din.gif" width="100px">
           </a>
 
       </div>

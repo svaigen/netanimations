@@ -1,10 +1,35 @@
 angular.module('netanimations.hybridmodel', [])
 
-.controller('HybridModelCtrl', function($state, $scope, $ionicPopup, $translate) {
+.controller('HybridModelCtrl', function($state, $scope, $ionicPopup, $translate, $compile) {
 
   $scope.end = false;
 
   var tl = new TimelineLite();
+
+  $scope.tl = tl;
+
+  $scope.accessibilityGo = function(op,state){
+    switch (op) {
+      case 'exit':
+        $scope.tl.seek(0);
+        $state.go(state);
+        break;
+      case 'next':
+        cleanContentInfo();
+        $scope.tl.resume();
+        break;
+      case 'back':
+        cleanContentInfo();
+        $scope.tl.seek(state); //checkpoint de retrocesso
+        $scope.tl.play();
+        break;
+      case 'restart':
+        cleanContentInfo();
+        $scope.tl.seek(state);
+        $scope.tl.play();
+        break;
+    }
+  };
 
   $scope.restart = function () {
     tl.seek(0);
@@ -79,19 +104,19 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step1");
   tl.call( function(){
-    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'HYBRID_MODEL_PRESENTATION_1');
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'INFO', 'HYBRID_MODEL_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_2',"step1");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'EXAMPLE', 'HYBRID_MODEL_PRESENTATION_3',"step2");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'EXAMPLE', 'HYBRID_MODEL_PRESENTATION_3',"step2");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/3-4.ogg')}});
@@ -105,7 +130,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step4");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_4',"step3");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_4',"step3");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/4-5.ogg')}});
@@ -128,7 +153,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step5");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_5',"step4");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_5',"step4");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/5-6.ogg')}});
@@ -153,7 +178,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step6");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_6',"step5");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_6',"step5");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/6-7.ogg')}});
@@ -180,10 +205,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step7");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_7',"step6");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_7',"step6");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/7-8 14-15.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/7-8_14-15.ogg')}});
     tl.to(message,1,sendDown);
     tl.to(segment1,1,delaySendDown);
     tl.to(segment2,1,delaySendDown);
@@ -209,7 +234,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step8");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_8',"step7");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_8',"step7");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/8-9.ogg')}});
@@ -245,7 +270,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step9");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_9',"step8");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_9',"step8");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/9-10.ogg')}});
@@ -313,7 +338,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step10");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'EXAMPLE', 'HYBRID_MODEL_PRESENTATION_10',"step9");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'EXAMPLE', 'HYBRID_MODEL_PRESENTATION_10',"step9");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/10-11.ogg')}});
@@ -339,10 +364,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step11");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11',"step10");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11',"step10");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/11-12 17-18.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/11-12_17-18.ogg')}});
     tl.to(segment4,4,sendRight);
     tl.to(segment3,1,delaySendRight);
     tl.to(segment2,1,delaySendRight);
@@ -359,10 +384,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step12");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12',"step11");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12',"step11");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/12-13 18-19.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/12-13_18-19.ogg')}});
     tl.to(segment4,0,insertFadeout);
     tl.to(segment4,3,hide);
     tl.to(segment4,0,removeFadeout);
@@ -382,7 +407,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step13");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_13',"step12");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_13',"step12");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/13-14.ogg')}});
@@ -399,10 +424,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step14");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_14',"step13");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_14',"step13");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/7-8 14-15.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/7-8_14-15.ogg')}});
     tl.to(segment4,4,show);
     tl.to(segment4,4,sendLeft);
     tl.to(segment3,1,delaySendLeft);
@@ -420,7 +445,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step15");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_15',"step14");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'ENCAPSULATION', 'HYBRID_MODEL_PRESENTATION_15',"step14");
   });
 
   if(audiovisualPreference){
@@ -541,7 +566,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step16");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_16',"step15");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'HYBRID_MODEL_PRESENTATION_16',"step15");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/16-17.ogg')}});
@@ -564,10 +589,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step17");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11',"step16");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_11',"step16");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/11-12 17-18.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/11-12_17-18.ogg')}});
     tl.to(segment4,4,sendRight);
     tl.to(segment3,1,delaySendRight);
     tl.to(segment2,1,delaySendRight);
@@ -583,10 +608,10 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step18");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12',"step17");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_12',"step17");
   });
   if(audiovisualPreference){
-    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/12-13 18-19.ogg')}});
+    tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/12-13_18-19.ogg')}});
     tl.to(segment4,0,insertFadeout);
     tl.to(segment4,5,hide);
     tl.to(segment4,0,removeFadeout);
@@ -606,7 +631,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step19");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_17',"step18");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_17',"step18");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/19-20.ogg')}});
@@ -627,7 +652,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step20");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_18',"step19");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_18',"step19");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/20-21.ogg')}});
@@ -646,7 +671,7 @@ angular.module('netanimations.hybridmodel', [])
 
   tl.add("step21");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_19',"step20");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'DECAPSULATION', 'HYBRID_MODEL_PRESENTATION_19',"step20");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/hybrid/21-22.ogg')}});
@@ -661,7 +686,7 @@ angular.module('netanimations.hybridmodel', [])
 
   //end
   tl.call(function() {
-    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step21","step1");
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'END', 'ANIMATION_END',"step21","step1");
   });
 
 });

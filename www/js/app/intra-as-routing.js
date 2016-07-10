@@ -1,8 +1,33 @@
 angular.module('netanimations.intraasrouting', [])
-.controller('IntraAsRoutingCtrl', function($state, $scope, $ionicPopup, $translate) {
+.controller('IntraAsRoutingCtrl', function($state, $scope, $ionicPopup, $translate, $compile) {
   $scope.end = false;
 
   var tl = new TimelineLite();
+
+  $scope.tl = tl;
+
+  $scope.accessibilityGo = function(op,state){
+    switch (op) {
+      case 'exit':
+        $scope.tl.seek(0);
+        $state.go(state);
+        break;
+      case 'next':
+        cleanContentInfo();
+        $scope.tl.resume();
+        break;
+      case 'back':
+        cleanContentInfo();
+        $scope.tl.seek(state); //checkpoint de retrocesso
+        $scope.tl.play();
+        break;
+      case 'restart':
+        cleanContentInfo();
+        $scope.tl.seek(state);
+        $scope.tl.play();
+        break;
+    }
+  };
 
   $scope.restart = function () {
     tl.seek(0);
@@ -37,49 +62,49 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step1");
   tl.call( function(){
-    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'INTRA_AS_PRESENTATION_1');
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'INFO', 'INTRA_AS_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_2',"step1");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_3',"step2");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_3',"step2");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step4");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_4',"step3");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_4',"step3");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step5");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_5',"step4");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_5',"step4");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step6");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_6',"step5");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_6',"step5");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step7");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_7',"step6");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_7',"step6");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step8");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_8',"step7");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_8',"step7");
   });
   if(audiovisualPreference){
     //change background to bg2
@@ -100,7 +125,7 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step9");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_9',"step8");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_9',"step8");
   });
   if(audiovisualPreference){
     //show 1b router's table
@@ -113,7 +138,7 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step10");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_10',"step9");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_10',"step9");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/10-11.ogg')}});
@@ -186,7 +211,7 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step11");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_11',"step10");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_11',"step10");
   });
   if(audiovisualPreference){
     //showing 1c router's table
@@ -205,7 +230,7 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step12");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_12',"step11");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_12',"step11");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/12-13.ogg')}});
@@ -238,7 +263,7 @@ angular.module('netanimations.intraasrouting', [])
 
   tl.add("step13");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_13',"step12");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'INTRA_AS_PRESENTATION_13',"step12");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/rip/13-14.ogg')}});
@@ -287,7 +312,7 @@ angular.module('netanimations.intraasrouting', [])
 
   //end
   tl.call(function() {
-    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step13","step1");
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'END', 'ANIMATION_END',"step13","step1");
   });
 });
 

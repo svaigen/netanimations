@@ -1,29 +1,33 @@
 <ion-side-menus>
-
     <ion-pane ion-side-menu-content>
         <ion-nav-bar class="bar-stable nav-title-slide-ios7">
         </ion-nav-bar>
         <ion-nav-view name="menuContent" animation="slide-left-right"></ion-nav-view>
     </ion-pane>
 
-    <ion-side-menu side="left">
+    <ion-side-menu id="menuInit" side="left" role="menu">
         <header class="bar bar-header bar-stable">
-            <h1 class="title">Menu</h1>
+            <h1 id="menutitle" class="title"><a href="" id="menutab">Menu</a></h1>
         </header>
         <ion-content class="has-header">
             <ion-list>
+              <a role="menuitem" class="menuitem item item-icon-left" nav-clear menu-close ng-click="redirect('map')" href="">
+                <i class="icon ion-android-list"></i>
+                {{'MAP' | translate}}
+              </a>
 
-                <a class="item item-icon-left" nav-clear menu-close href="#/app/animations">
+                <a id="animationsmenu" role="menuitem" class="menuitem item item-icon-left" nav-clear menu-close ng-click="redirect('animations')" href="">
                     <i class="icon ion-home"></i>
                     {{'ANIMATIONS' | translate}}
                 </a>
 
-                <a class="item item-icon-left" nav-clear menu-close href="#/app/config">
+
+                <a id="configmenu" role="menuitem" class="menuitem item item-icon-left" nav-clear menu-close ng-click="redirect('config')" href="">
                     <i class="icon ion-settings"></i>
                     {{'CONFIGS' | translate}}
                 </a>
 
-                <a class="item item-icon-left" nav-clear menu-close href="#/app/about">
+                <a id="aboutmenu" role="menuitem" class="menuitem item item-icon-left" nav-clear menu-close ng-click="redirect('about')" href="">
                     <i class="icon ion-information"></i>
                     {{'ABOUT' | translate}}
                 </a>
