@@ -156,6 +156,7 @@ angular.module('netanimations', ['ionic', 'netanimations.controllers', 'pascalpr
     FINISH: 'Finish',
     RESTART: 'Restart',
     ACCESSIBILITY: 'Acessibilidade audiovisual',
+
     MAP: 'App Map',
     MAP_DESCRIPTION: 'In this page you can find a textual map with all app\'s content. See below.',
     MAP_CONFIGS:'In Config\'s page, you can select a pattern app\'s language and allow the animations audiovisual accessibility too.',

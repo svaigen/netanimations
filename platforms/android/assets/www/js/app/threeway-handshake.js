@@ -15,12 +15,17 @@ angular.module('netanimations.threewayhandshake', [])
         $state.go(state);
         break;
       case 'next':
-        $scope.content.innerHTML = "";
+        cleanContentInfo();
         $scope.tl.resume();
         break;
       case 'back':
-        $scope.content.innerHTML = "";
+        cleanContentInfo();
         $scope.tl.seek(state); //checkpoint de retrocesso
+        $scope.tl.play();
+        break;
+      case 'restart':
+        cleanContentInfo();
+        $scope.tl.seek(state);
         $scope.tl.play();
         break;
     }
@@ -144,7 +149,7 @@ angular.module('netanimations.threewayhandshake', [])
   }
 
   tl.call(function() {
-    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'TWHS_END',"step6","step1");
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'END', 'TWHS_END',"step6","step1");
   });
 
   //hide

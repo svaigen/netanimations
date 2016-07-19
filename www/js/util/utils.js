@@ -12,14 +12,16 @@ function cleanContentInfo(){
 function initialPopup(tl, $translate, $ionicPopup, $state, $scope, $compile, paramTitle, paramTemplate){
   tl.pause();
   if($scope.audiovisual){
-    document.getElementById('content-title').innerHTML = $translate.instant(paramTitle);
-    document.getElementById('content-text').innerHTML = $translate.instant(paramTemplate);
+    document.getElementById('content-title').innerHTML = $translate.instant('INFO');
+    document.getElementById('content-text').innerHTML = $translate.instant(paramTitle)+":"+$translate.instant(paramTemplate);
     document.getElementById('content-buttons').innerHTML = "<a role=\"button\" ng-click=\"accessibilityGo('next')\" href=\"\">"
                                +$translate.instant('NEXT')+"</a>"
                                +"<a role=\"button\" ng-click=\"accessibilityGo('exit','app.animations')\" href=\"\">"
                                +$translate.instant('BACK_ANIMATIONS')+"</a>";
     $compile(document.getElementById('content-buttons'))($scope);
-    document.getElementById('content-title').focus();
+    $scope.$watch('$viewContentLoaded',function(event){
+        document.getElementById('content-title').focus();
+    });
   }else{
     $ionicPopup.show({
       title: $translate.instant(paramTitle),
@@ -47,14 +49,16 @@ function initialPopup(tl, $translate, $ionicPopup, $state, $scope, $compile, par
 function commonPopup(tl, $scope, $compile, $translate, $ionicPopup, paramTitle, paramTemplate, paramBack){
   tl.pause(); //interrupção do fluxo do objeto de animação
   if($scope.audiovisual){
-    document.getElementById('content-title').innerHTML = $translate.instant(paramTitle);
-    document.getElementById('content-text').innerHTML = $translate.instant(paramTemplate);
+    document.getElementById('content-title').innerHTML = $translate.instant('INFO');
+    document.getElementById('content-text').innerHTML = $translate.instant(paramTitle)+":"+$translate.instant(paramTemplate);
     document.getElementById('content-buttons').innerHTML = "<a role=\"button\" ng-click=\"accessibilityGo('next')\" href=\"\">"
                                +$translate.instant('NEXT')+"</a>"
                                +"<a role=\"button\" ng-click=\"accessibilityGo('back','"+paramBack+"')\" href=\"\">"
                                +$translate.instant('BACK')+"</a>";
     $compile(document.getElementById('content-buttons'))($scope);
-    document.getElementById('content-title').focus();
+    $scope.$watch('$viewContentLoaded',function(event){
+        document.getElementById('content-title').focus();
+    });
   }else{
     $translate([paramTitle, paramTemplate]).then(function(translations) {
       $ionicPopup.show({ //criação da popup com objeto construtor
@@ -83,8 +87,8 @@ function commonPopup(tl, $scope, $compile, $translate, $ionicPopup, paramTitle, 
 function endPopup(tl, $translate, $ionicPopup, $state, $scope, $compile, paramTitle, paramTemplate, paramBack,paramRestart){
   tl.pause();
   if($scope.audiovisual){
-    document.getElementById('content-title').innerHTML = $translate.instant(paramTitle);
-    document.getElementById('content-text').innerHTML = $translate.instant(paramTemplate);
+    document.getElementById('content-title').innerHTML = $translate.instant('INFO');
+    document.getElementById('content-text').innerHTML = $translate.instant(paramTitle)+":"+$translate.instant(paramTemplate);
     document.getElementById('content-buttons').innerHTML = "<a role=\"button\" ng-click=\"accessibilityGo('exit')\" href=\"\">"
                                +$translate.instant('FINISH')+"</a>"
                                +"<a role=\"button\" ng-click=\"accessibilityGo('back','"+paramBack+"')\" href=\"\">"
@@ -92,7 +96,9 @@ function endPopup(tl, $translate, $ionicPopup, $state, $scope, $compile, paramTi
                                +"<a role=\"button\" ng-click=\"accessibilityGo('restart','"+paramRestart+"')\" href=\"\">"
                                +$translate.instant('RESTART')+"</a>";
     $compile(document.getElementById('content-buttons'))($scope);
-    document.getElementById('content-title').focus();
+    $scope.$watch('$viewContentLoaded',function(event){
+        document.getElementById('content-title').focus();
+    });
   }else{
     $ionicPopup.show({
       title: $translate.instant(paramTitle),

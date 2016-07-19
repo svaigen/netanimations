@@ -1,11 +1,12 @@
 angular.module('netanimations.purealoha', [])
-.controller('PureAlohaCtrl', function($state, $scope, $ionicPopup, $translate) {
+.controller('PureAlohaCtrl', function($state, $scope, $ionicPopup, $translate, $compile) {
   TweenLite.defaultEase = Power1.easeInOut;
   $scope.end = false;
   $scope.restart = function () {
     tl.seek(0);
     $scope.end = false;
   };
+
   var segment1 = "#segment-1";
   var segment2 = "#segment-2";
   var patternHeight = 595;
@@ -33,7 +34,34 @@ angular.module('netanimations.purealoha', [])
   var sendDown2 = {top: "+="+downScale2};
   var sendRight = {left: "+="+rightAndLeftScale};
   var sendLeft = {left: "-="+rightAndLeftScale};
+
   var tl = new TimelineMax();
+
+  $scope.tl = tl;
+
+  $scope.accessibilityGo = function(op,state){
+    switch (op) {
+      case 'exit':
+        $scope.tl.seek(0);
+        $state.go(state);
+        break;
+      case 'next':
+        cleanContentInfo();
+        $scope.tl.resume();
+        break;
+      case 'back':
+        cleanContentInfo();
+        $scope.tl.seek(state); //checkpoint de retrocesso
+        $scope.tl.play();
+        break;
+      case 'restart':
+        cleanContentInfo();
+        $scope.tl.seek(state);
+        $scope.tl.play();
+        break;
+    }
+  };
+
   var audio = document.createElement('audio');
   var audiovisualPreference = $scope.audiovisual;
 
@@ -47,19 +75,19 @@ angular.module('netanimations.purealoha', [])
 
   tl.add("step1");
   tl.call( function(){
-    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'PURE_ALOHA_PRESENTATION_1');
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'INFO', 'PURE_ALOHA_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_2',"step1");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_3',"step2");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_3',"step2");
   });
   //Host A sends first segment
   if(audiovisualPreference){
@@ -76,13 +104,13 @@ angular.module('netanimations.purealoha', [])
 
   tl.add("step4");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_4',"step3");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_4',"step3");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step5");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_5',"step4");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_5',"step4");
   });
   //Host B sends a segment and there's a colision
   if(audiovisualPreference){
@@ -103,7 +131,7 @@ angular.module('netanimations.purealoha', [])
 
   tl.add("step6");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_6',"step5");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_6',"step5");
   });
   //Host A sends the segment to Host C
   if(audiovisualPreference){
@@ -131,13 +159,13 @@ angular.module('netanimations.purealoha', [])
 
   tl.add("step7");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_7',"step6");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_7',"step6");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step8");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_8',"step7");
+      commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'PURE_ALOHA_PRESENTATION_8',"step7");
   });
   //Host B sends segment to Host C
   if(audiovisualPreference){
@@ -164,7 +192,7 @@ angular.module('netanimations.purealoha', [])
   }
 
   tl.call(function() {
-    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step8","step1");
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'END', 'ANIMATION_END',"step8","step1");
   });
 });
 

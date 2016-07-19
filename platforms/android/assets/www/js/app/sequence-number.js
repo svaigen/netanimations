@@ -1,5 +1,5 @@
 angular.module('netanimations.sequencenumber', [])
-.controller('SequenceNumberCtrl', function($state, $scope, $ionicPopup, $translate) {
+.controller('SequenceNumberCtrl', function($state, $scope, $ionicPopup, $translate, $compile) {
   $scope.end = false;
 
   var tl = new TimelineLite();
@@ -7,6 +7,31 @@ angular.module('netanimations.sequencenumber', [])
   $scope.restart = function () {
     tl.seek(0);
     $scope.end = false;
+  };
+
+  $scope.tl = tl;
+
+  $scope.accessibilityGo = function(op,state){
+    switch (op) {
+      case 'exit':
+        $scope.tl.seek(0);
+        $state.go(state);
+        break;
+      case 'next':
+        cleanContentInfo();
+        $scope.tl.resume();
+        break;
+      case 'back':
+        cleanContentInfo();
+        $scope.tl.seek(state); //checkpoint de retrocesso
+        $scope.tl.play();
+        break;
+      case 'restart':
+        cleanContentInfo();
+        $scope.tl.seek(state);
+        $scope.tl.play();
+        break;
+    }
   };
 
   TweenLite.defaultEase = Power1.easeInOut;
@@ -37,32 +62,32 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step1");
   tl.call( function(){
-    initialPopup(tl,$translate, $ionicPopup, $state, $scope, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_1');
+    initialPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_1');
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step2");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_2',"step1");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_2',"step1");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step3");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_3',"step2");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_3',"step2");
   });
 
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step4");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_4',"step3");
+    commonPopup(tl,  $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_4',"step3");
   });
   tl.to('.animationFrame', 0.5, {x: 0}); //dummy step - do not remove
 
   tl.add("step5");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_5',"step4");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_5',"step4");
   });
 
   if(audiovisualPreference){
@@ -78,7 +103,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step6");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'SEGMENT_1', 'SEQUENCE_NUMBER_PRESENTATION_6',"step5");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'SEGMENT_1', 'SEQUENCE_NUMBER_PRESENTATION_6',"step5");
   });
 
 
@@ -96,7 +121,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step7");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_7',"step6");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_7',"step6");
   });
 
   if(audiovisualPreference){
@@ -114,7 +139,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step8");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_8',"step7");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_8',"step7");
   });
 
   if(audiovisualPreference){
@@ -131,7 +156,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step9");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_9',"step8");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_9',"step8");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/9-10.ogg')}});
@@ -146,7 +171,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step10");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_10',"step9");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_10',"step9");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
@@ -162,7 +187,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step11");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_11',"step10");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_11',"step10");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12_14-15.ogg')}});
@@ -181,7 +206,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step12");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_12',"step11");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_12',"step11");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
@@ -196,14 +221,14 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step13");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_13',"step12");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_13',"step12");
   });
   //dummy step - do not remove
   tl.to(segment1, 0.5, {width: 50});
 
   tl.add("step14");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_14',"step13");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'INFO', 'SEQUENCE_NUMBER_PRESENTATION_14',"step13");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/11-12_14-15.ogg')}});
@@ -223,7 +248,7 @@ angular.module('netanimations.sequencenumber', [])
 
   tl.add("step15");
   tl.call(function() {
-    commonPopup(tl,$translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_15',"step14");
+    commonPopup(tl, $scope, $compile, $translate, $ionicPopup, 'SEGMENT', 'SEQUENCE_NUMBER_PRESENTATION_15',"step14");
   });
   if(audiovisualPreference){
     tl.to(audio,1,{onComplete:function(){playAudio(audio,'audio/sequence/6-7_10-11_12-13_15-16.ogg')}});
@@ -239,7 +264,7 @@ angular.module('netanimations.sequencenumber', [])
 
   //end
   tl.call(function() {
-    endPopup(tl,$translate, $ionicPopup, $state, $scope, 'END', 'ANIMATION_END',"step14","step1");
+    endPopup(tl,$translate, $ionicPopup, $state, $scope, $compile, 'END', 'ANIMATION_END',"step14","step1");
   });
   $scope.end = true;
 });
