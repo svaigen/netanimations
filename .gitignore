@@ -1,0 +1,16 @@
+# Unversioned directories
+node_modules
+platforms
+release
+
+# Windows files
+Thumbs.db
+www/img/threeway-handshake/Thumbs.db
+www/img/sequence-number/Thumbs.db
+www/img/Thumbs.db
+www/img/pure-aloha/Thumbs.db
+www/img/icons/Thumbs.db
+
+# Webstorm
+.idea
+projectFilesBackup

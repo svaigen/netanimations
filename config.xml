@@ -1,22 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="br.edu.uem.alissonrenansvaigen.netanimations" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>NetAnimations</name>
-  <description>
-        Animations from Computer Network classes. Universidade Estadual de Maringá - Paraná - Brazil.
-    </description>
-  <author email="alisson.svg@gmail.com" href="http://lattes.cnpq.br/7020581399426457">
-      Alisson Renan Svaigen - continuing the work of Jonathan Rodrigues de Oliveira
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.jonathanoliveira.netanimations" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>NetAnimations</name>
+    <description> Animations from Computer Network classes. Universidade Estadual de Maringá - Paraná - Brazil.</description>
+    <author email="contato@jonathanoliveira.com" href="http://jonathanoliveira.com/">
+        Jonathan Rodrigues de Oliveira
     </author>
-  <content src="index.html"/>
-  <icon src="www/img/icon.png"/>
-  <access origin="*"/>
-  <preference name="webviewbounce" value="false"/>
-  <preference name="UIWebViewBounce" value="false"/>
-  <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
-  <preference name="BackupWebStorage" value="none"/>
-  <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
-  <feature name="StatusBar">
-    <param name="ios-package" value="CDVStatusBar" onload="true"/>
-  </feature>
+    <icon src="www/img/icon.png" />
+    <content src="index.html" />
+    <access origin="*" />
+    <preference name="fullscreen" value="false" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="UIWebViewBounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="orientation" value="portrait" />
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" onload="true" />
+    </feature>
 </widget>
